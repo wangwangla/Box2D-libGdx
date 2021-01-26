@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -20,12 +21,13 @@ public class MainGame extends Game {
     private Box2DDebugRenderer renderer;
     @Override
     public void create() {
+        Box2D.init();
         Gdx.input.setCatchBackKey(true);
         assetManager = new AssetManager();
         viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuSpriteBatch();
-        Constant.world = world = new World(new Vector2(0,0F),true);
+        Constant.world = world = new World(new Vector2(0,-90F),true);
         Constant.renderer = renderer = new Box2DDebugRenderer();
         setScreen(new GameScreen(this));
     }

@@ -126,7 +126,6 @@ public class BodyImage extends Image {
         super.act(delta);
 
         if (body != null){
-            System.out.println(body.getAngle());
             if (body.getPosition().x != getX() || body.getPosition().y != getY()) {
                 setPosition(body.getPosition().x, body.getPosition().y,Align.center);
             }

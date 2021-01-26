@@ -1,5 +1,7 @@
 package com.kangwang.word;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -26,60 +28,77 @@ public class GameView extends Group {
     int[] m_indices = new int[e_rowCount * e_columnCount];
     public GameView(){
         Constant.world.setContactListener(new WorldListener());
-//        setSize(Constant.width,Constant.hight);
-//        //0,0为创建的左下角
-//        Box2DFactory factory = new Box2DFactory();
-//        factory.setSize(Constant.width,1);
-//        factory.setDensity(0.5F);
-//        factory.setFriction(0.4F);
-////        factory.setRestitution(0.6F);
-//        factory.getBody();
-//
-//
-//        PolygonShape polygonShape = new PolygonShape();
-//        Vector2[] vertices = new Vector2[3];
-//        vertices[0] = new Vector2(0, 0);
-//        vertices[1] = new Vector2(100, 100);
-//        vertices[2] = new Vector2(200, 0);
-//        polygonShape.set(vertices);
-//        factory.setShape(polygonShape);
-//        factory.setRestitution(0.3F);
-//        factory.getBody();
-//
-//
-//        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
-//        bodyImage.setPosition(120,600);
-//        bodyImage.createBox2DImage();
-//        addActor(bodyImage);
-//        setDebug(true);
+        setSize(Constant.width,Constant.hight);
+        //0,0为创建的左下角
+        Box2DFactory factory = new Box2DFactory();
+        factory.setSize(Constant.width,1);
+        factory.setDensity(0.5F);
+        factory.setFriction(0.4F);
+//        factory.setRestitution(0.6F);
+        factory.getBody();
 
-        initBlack();
-        initBottomBlack();
-        initRedis();
+
+        PolygonShape polygonShape = new PolygonShape();
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(0, 0);
+        vertices[1] = new Vector2(100, 100);
+        vertices[2] = new Vector2(200, 0);
+        polygonShape.set(vertices);
+        factory.setShape(polygonShape);
+        factory.setRestitution(0.3F);
+        Body body = factory.getBody();
+        body.setTransform(0,0,0);
+
+
+        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
+        bodyImage.setPosition(120,600);
+        bodyImage.createBox2DImage();
+        addActor(bodyImage);
+        bodyImage.getBody().setFixedRotation(true);
+        System.out.println(bodyImage.getBody().isFixedRotation());
+
+
+//        initBlack();
+//        initBottomBlack();
+//        initRedis();
+    }
+
+    private void initKey() {
+        bottom.getBody().setLinearVelocity(0,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        }else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+
+        }else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            bottom.getBody().setLinearVelocity(-100,0);
+        }else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            bottom.getBody().setLinearVelocity(100,0);
+        }
     }
 
     private void initRedis() {
-        BodyImage image = new BodyImage(new TextureRegion(new Texture("2.png")));
-        image.setSize(20,20);
-        image.setType(BodyDef.BodyType.DynamicBody);
-        image.setPosition(Constant.width/2,50,Align.bottom);
-        image.setRestitution(1F);
-        image.setCategoryBits(Constant.BUTT_BIT);
-        image.setMaskBits(Constant.BLACK_BIT | Constant.WALL_BIT|Constant.BUTTOM_BIT);
-        image.createBox2DImage();
-        image.getBody().setLinearVelocity(0,71);
-        addActor(image);
+        BodyImage buut = new BodyImage(new TextureRegion(new Texture("2.png")));
+        buut.setSize(20,20);
+        buut.setType(BodyDef.BodyType.DynamicBody);
+        buut.setPosition(Constant.width/2,50,Align.bottom);
+        buut.setRestitution(1F);
+        buut.setCategoryBits(Constant.BUTT_BIT);
+        buut.setMaskBits(Constant.BLACK_BIT | Constant.WALL_BIT|Constant.BUTTOM_BIT);
+        buut.createBox2DImage();
+        buut.getBody().setLinearVelocity(0,71);
+        addActor(buut);
     }
-
+    BodyImage bottom;
     private void initBottomBlack() {
-        BodyImage image = new BodyImage(new TextureRegion(new Texture("1.png")));
-        image.setSize(100,5);
-        image.setPosition(Constant.width/2,20, Align.bottom);
-        addActor(image);
-        image.setType(BodyDef.BodyType.StaticBody);
-        image.setCategoryBits(Constant.BUTTOM_BIT);
-        image.setMaskBits(Constant.BUTT_BIT);
-        image.createBox2DImage();
+        bottom = new BodyImage(new TextureRegion(new Texture("1.png")));
+        bottom.setSize(100,5);
+        bottom.setPosition(Constant.width/2,20, Align.bottom);
+        addActor(bottom);
+        bottom.setDensity(100);
+        bottom.setFriction(100);
+        bottom.setType(BodyDef.BodyType.DynamicBody);
+        bottom.setCategoryBits(Constant.BUTTOM_BIT);
+        bottom.setMaskBits(Constant.BUTT_BIT);
+        bottom.createBox2DImage();
     }
 
 
@@ -422,7 +441,9 @@ public class GameView extends Group {
 
     @Override
     public void act(float delta) {
+//        initKey();
         super.act(delta);
+
         Constant.world.step(1/60f, 6, 2);
         Constant.renderer.render(Constant.world,Constant.combined);
     }

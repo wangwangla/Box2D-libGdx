@@ -27,7 +27,7 @@ class GameScreen implements Screen {
 
         @Override
         public boolean keyTyped(char character) {
-            keyEvent(keycode);
+//            keyEvent(keycode);
             return super.keyTyped(character);
         }
 
@@ -37,9 +37,17 @@ class GameScreen implements Screen {
         }
     };
 
-    protected void keyEvent(int keyCode){
-
-    }
+//    protected void keyEvent(int keyCode){
+//        if (keyCode == Input.Keys.UP){
+//
+//        }else if (keyCode == Input.Keys.DOWN){
+//
+//        }else if (keyCode == Input.Keys.LEFT){
+//
+//        }else if (keyCode == Input.Keys.RIGHT){
+//
+//        }
+//    }
 
     @Override
     public void show() {
