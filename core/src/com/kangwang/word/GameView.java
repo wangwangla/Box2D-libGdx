@@ -37,6 +37,7 @@ public class GameView extends Group {
 //        factory.setRestitution(0.6F);
         factory.getBody();
 
+        factory.reset();
 
         PolygonShape polygonShape = new PolygonShape();
         Vector2[] vertices = new Vector2[3];
@@ -46,6 +47,7 @@ public class GameView extends Group {
         polygonShape.set(vertices);
         factory.setShape(polygonShape);
         factory.setRestitution(0.3F);
+        factory.setType(BodyDef.BodyType.DynamicBody);
         Body body = factory.getBody();
         body.setTransform(0,0,0);
 
@@ -53,14 +55,8 @@ public class GameView extends Group {
         BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
         bodyImage.setPosition(120,600);
         bodyImage.createBox2DImage();
+        bodyImage.getBody().setFixedRotation(false);
         addActor(bodyImage);
-        bodyImage.getBody().setFixedRotation(true);
-        System.out.println(bodyImage.getBody().isFixedRotation());
-
-
-//        initBlack();
-//        initBottomBlack();
-//        initRedis();
     }
 
     private void initKey() {

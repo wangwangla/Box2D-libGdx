@@ -47,6 +47,7 @@ public class BodyImage extends Image {
 
     public BodyImage(TextureRegion region) {
         super(region);
+        setOrigin(Align.center);
     }
 
     public BodyDef.BodyType getType() {
@@ -116,6 +117,7 @@ public class BodyImage extends Image {
         if (maskBits != -1) {
             fixtureDef.filter.maskBits = (short) maskBits;
         }
+        fixtureDef.density = 100;
         body.createFixture(fixtureDef);
         shape.dispose();
         body.setUserData(this);
@@ -124,10 +126,11 @@ public class BodyImage extends Image {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         if (body != null){
             if (body.getPosition().x != getX() || body.getPosition().y != getY()) {
                 setPosition(body.getPosition().x, body.getPosition().y,Align.center);
+                float degrees = (float) Math.toDegrees(body.getAngle());
+                setRotation(degrees);
             }
         }
     }

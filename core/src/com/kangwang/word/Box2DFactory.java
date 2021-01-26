@@ -19,6 +19,19 @@ public class Box2DFactory {
     private float friction;
     private float restitution;
 
+    public void reset(){
+        type = BodyDef.BodyType.StaticBody;
+        position = new Vector2(0,0);
+        float width = 10;
+        float height = 10;
+        Shape shape;
+        short categoryBits = -1;
+        short maskBits = -1;
+        float density;
+        float friction;
+        float restitution;
+    }
+
     public void setSize(float width,float height){
         this.width = width;
         this.height = height;
