@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "197579003575",
+    "firebase_url": "https://word-squares-2e082.firebaseio.com",
+    "project_id": "word-squares-2e082",
+    "storage_bucket": "word-squares-2e082.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197579003575:android:78d9f7d9d30dcdcc61df32",
+        "android_client_info": {
+          "package_name": "com.kangwang.word"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197579003575-f9l10cb23d6ntan23umgf3ikj07ccubl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl9kNzhrAnuZJAM9K8rcrTsvAHs9JNrZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197579003575-f9l10cb23d6ntan23umgf3ikj07ccubl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

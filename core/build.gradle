@@ -1,0 +1,11 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20180813'
+    compile project(':gdx')
+    compile project(':gdx-box2d')
+}
+
+sourceSets.main.java.srcDirs = [ "src/" ]

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kangwang.word"
+    android:installLocation="preferExternal">
+
+<!--    <uses-permission android:name="android.permission.INTERNET"/>-->
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
+<!--    <uses-permission android:name="com.android.vending.BILLING"/>-->
+    <!--<uses-permission android:name="android.permission.OBSERVE_GRANT_REVOKE_PERMISSIONS"></uses-permission>-->
+
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove"/>-->
+<!--    <uses-permission android:name="android.permission.WAKE_LOCK" tools:node="remove"/>-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>-->
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true"/>
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false"/>
+
+    <uses-sdk
+        tools:overrideLibrary="
+                        com.google.android.gms.common,
+                        com.google.android.gms.ads_identifier,
+                         android.support.compat,
+                         com.facebook,
+                         com.google.android.gms,
+                         com.google.android.gms.ads,
+                         com.google.ads.mediation.facebook,
+                         com.google.android.gms.base,
+                         com.google.android.gms.tasks,
+                         com.google.android.gms.gass,
+                         com.google.android.exoplayer2.source.dash,
+                         com.google.android.exoplayer2.core,
+                         com.google.android.gms.clearcut,
+                         com.google.android.gms.ads.impl,
+                         android.support.v7.recyclerview,
+                         android.support.v7.appcompat,
+                         android.support.v7.viewpager,
+                         android.support.compat,
+                         android.support.graphics.drawable,
+                         android.support.coordinatorlayout,
+                         android.support.drawerlayout,
+                         android.support.slidingpanelayout,
+                         android.support.customview,
+                         android.support.swiperefreshlayout,
+                         android.support.interpolator,
+                         android.support.asynclayoutinflater,
+                         android.support.cursoradapter,
+                         android.support.documentfile,
+                         android.support.loader,
+                         android.support.localbroadcastmanager,
+                         android.support.print,
+                         android.support.coreutils,
+                         android.support.v4,
+                         android.support.coreui,
+                         android.support.mediacompat,
+                         android.support.fragment,
+                         androidx.versionedparcelable,
+                         android.arch.lifecycle,
+                         android.arch.lifecycle.livedata.core,
+                         android.arch.lifecycle.viewmodel,
+                         android.arch.core,
+                         com.facebook.ads,
+                         com.vungle.warren,
+                         com.doodlemobile.videoads,
+                         com.doodlemobile.gamecenter.billing,
+                         com.doodlemobile.ads,
+                         com.doodlemobile.helper,
+                         com.facebook.core,
+                         com.google.android.gms,
+                         com.doodlemobile.helper.admoblow,
+                         com.deltadna.android.sdk,
+                         com.doodlemobile.helper.facebook,
+                         com.appsflyer,
+                         com.appsflyer.oaid,
+                         com.google.firebase.remoteconfig,
+                         com.google.firebase.firebase_analytics,
+                         com.google.firebase.measurement,
+                         com.google.android.gms.measurement.api,
+                         com.google.android.gms.measurement.sdk,
+                         com.google.firebase.measurement_impl,
+                         com.google.android.gms.measurement.sdk.api,
+                         com.google.android.gms.measurement_base"
+        />
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+
+        <activity
+            android:name=".AndroidLauncher"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false"
+            android:launchMode="singleTask"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|locale|layoutDirection|smallestScreenSize|fontScale|screenLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
