@@ -118,13 +118,13 @@ repositories {
         name 'Google'
     }
     maven { url 'http://deltadna.bintray.com/android' }
-//    mavenLocal()
-//    mavenCentral()
-//    jcenter()
-//    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }// for ironsource
-//    maven { url 'https://jitpack.io' }//for vungle
-//    maven { url "https://maven.google.com/" }
-//    maven { url "https://mvnrepository.com/" }
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }// for ironsource
+    maven { url 'https://jitpack.io' }//for vungle
+    maven { url "https://maven.google.com/" }
+    maven { url "https://mvnrepository.com/" }
     flatDir {
         dirs 'libs'  // 申明本地库
     }
