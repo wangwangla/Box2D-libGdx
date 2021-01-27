@@ -123,13 +123,17 @@ public class BodyImage extends Image {
         body.setUserData(this);
     }
 
+    float degrees;
+
     @Override
     public void act(float delta) {
         super.act(delta);
         if (body != null){
             if (body.getPosition().x != getX() || body.getPosition().y != getY()) {
                 setPosition(body.getPosition().x, body.getPosition().y,Align.center);
-                float degrees = (float) Math.toDegrees(body.getAngle());
+            }
+            degrees = (float) Math.toDegrees(body.getAngle());
+            if (degrees != getRotation()){
                 setRotation(degrees);
             }
         }

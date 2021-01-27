@@ -15,21 +15,21 @@ public class Box2DFactory {
     private Shape shape;
     private short categoryBits = -1;
     private short maskBits = -1;
-    private float density;
-    private float friction;
-    private float restitution;
+    private float density = -1;
+    private float friction = -1;
+    private float restitution = -1;
 
     public void reset(){
         type = BodyDef.BodyType.StaticBody;
         position = new Vector2(0,0);
         float width = 10;
         float height = 10;
-        Shape shape;
+        Shape shape = null;
         short categoryBits = -1;
         short maskBits = -1;
-        float density;
-        float friction;
-        float restitution;
+        float density = -1;
+        float friction = -1;
+        float restitution = -1;
     }
 
     public void setSize(float width,float height){

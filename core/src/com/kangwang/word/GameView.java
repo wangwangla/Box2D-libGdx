@@ -20,43 +20,40 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
 
 public class GameView extends Group {
-    static final int e_columnCount = 5;
-    static final int e_rowCount = 16;
 
-    Body m_bullet;
-    Body[] m_bodies = new Body[e_rowCount * e_columnCount];
-    int[] m_indices = new int[e_rowCount * e_columnCount];
     public GameView(){
-        Constant.world.setContactListener(new WorldListener());
-        setSize(Constant.width,Constant.hight);
-        //0,0为创建的左下角
-        Box2DFactory factory = new Box2DFactory();
-        factory.setSize(Constant.width,1);
-        factory.setDensity(0.5F);
-        factory.setFriction(0.4F);
-//        factory.setRestitution(0.6F);
-        factory.getBody();
+        /**********************斜面滑下***********************/
+//        Constant.world.setContactListener(new WorldListener());
+//        setSize(Constant.width,Constant.hight);
+//        //0,0为创建的左下角
+//        Box2DFactory factory = new Box2DFactory();
+//        factory.setSize(Constant.width,1);
+//        factory.setDensity(0.5F);
+//        factory.setFriction(0.4F);
+//        factory.getBody();
+//
+//        factory.reset();
+//
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(0, 0);
+//        vertices[1] = new Vector2(100, 100);
+//        vertices[2] = new Vector2(200, 0);
+//        polygonShape.set(vertices);
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//        body.setTransform(0,0,0);
+//
+//        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
+//        bodyImage.setPosition(120,600);
+//        bodyImage.createBox2DImage();
+//        bodyImage.getBody().setFixedRotation(false);
+//        addActor(bodyImage);
+        /*********************************************/
 
-        factory.reset();
-
-        PolygonShape polygonShape = new PolygonShape();
-        Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(0, 0);
-        vertices[1] = new Vector2(100, 100);
-        vertices[2] = new Vector2(200, 0);
-        polygonShape.set(vertices);
-        factory.setShape(polygonShape);
-        factory.setRestitution(0.3F);
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        Body body = factory.getBody();
-        body.setTransform(0,0,0);
-
-
-        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
-        bodyImage.setPosition(120,600);
-        bodyImage.createBox2DImage();
-        bodyImage.getBody().setFixedRotation(false);
-        addActor(bodyImage);
+        xx2();
     }
 
     private void initKey() {
@@ -111,6 +108,15 @@ public class GameView extends Group {
             image.createBox2DImage();
         }
     }
+
+    static final int e_columnCount = 5;
+    static final int e_rowCount = 16;
+
+    Body m_bullet;
+    Body[] m_bodies = new Body[e_rowCount * e_columnCount];
+    int[] m_indices = new int[e_rowCount * e_columnCount];
+
+
     enum State {
         Unknown, Above, Below
     }
@@ -326,38 +332,11 @@ public class GameView extends Group {
     }
 
     int e_count = 10;
-    public void xx1(){
+
+    public void rebound(){
         {
             BodyDef bd = new BodyDef();
             Body ground = Constant.world.createBody(bd);
-
-            EdgeShape shape = new EdgeShape();
-            shape.set(new Vector2(-40, 0), new Vector2(40, 0));
-            ground.createFixture(shape, 0);
-            shape.dispose();
-        }
-
-        {
-            CircleShape shape = new CircleShape();
-            shape.setRadius(1.0f);
-
-            for (int i = 0; i < e_count; i++) {
-                BodyDef bd = new BodyDef();
-                bd.type = BodyDef.BodyType.DynamicBody;
-                bd.position.set(0, 4.0f + 3.0f * i);
-                Body body = Constant.world.createBody(bd);
-                body.createFixture(shape, 1.0f);
-            }
-
-            shape.dispose();
-        }
-    }
-
-    public void xxx(){
-        {
-            BodyDef bd = new BodyDef();
-            Body ground = Constant.world.createBody(bd);
-
             EdgeShape shape = new EdgeShape();
             shape.set(new Vector2(-40, 0), new Vector2(40, 0));
             ground.createFixture(shape, 0.0f);
@@ -377,7 +356,7 @@ public class GameView extends Group {
             for (int i = 0; i < restitution.length; i++) {
                 BodyDef bd = new BodyDef();
                 bd.type = BodyDef.BodyType.DynamicBody;
-                bd.position.set(-10.0f + 3.0f * i, 20.0f);
+                bd.position.set(10.0f + 3.0f * i, 20.0f);
 
                 Body body = Constant.world.createBody(bd);
                 fd.restitution = restitution[i];
@@ -388,7 +367,7 @@ public class GameView extends Group {
         }
     }
 
-    public void xx(){
+    public void gavity1(){
         {
             BodyDef bd = new BodyDef();
             Body ground = Constant.world.createBody(bd);
@@ -402,7 +381,8 @@ public class GameView extends Group {
             shape.dispose();
         }
 
-        float xs[] = {0, -10, -5, 5, 10};
+//        float xs[] = {0, -10, -5, 5, 10};
+        float xs[] = {10, 10, 10, 10, 10};
 
         for (int j = 0; j < e_columnCount; j++) {
             PolygonShape shape = new PolygonShape();
@@ -418,14 +398,10 @@ public class GameView extends Group {
                 bd.type = BodyDef.BodyType.DynamicBody;
 
                 int n = j * e_rowCount + i;
-                m_indices[n] = n;
 
-                float x = 0;
-                bd.position.set(xs[j] + x, 0.752f + 1.54f * i);
+
+                bd.position.set(xs[j], 0.752f + 1.54f * i);
                 Body body = Constant.world.createBody(bd);
-                body.setUserData(n);
-
-                m_bodies[n] = body;
                 body.createFixture(fd);
             }
 
@@ -434,6 +410,89 @@ public class GameView extends Group {
 
         m_bullet = null;
     }
+
+    public void temp(){
+        {
+            BodyDef bd = new BodyDef();
+            Body ground = Constant.world.createBody(bd);
+            EdgeShape shape = new EdgeShape();
+            shape.set(new Vector2(-40, 0), new Vector2(40, 0));
+            ground.createFixture(shape, 0);
+            shape.dispose();
+        }
+
+//        CircleShape shape = new CircleShape();
+//        shape.setRadius(1.0f);
+
+//        FixtureDef fd = new FixtureDef();
+//        fd.shape = shape;
+//        fd.density = 1.0f;
+//        fd.friction = 0.3f;
+
+        for (int j = 0; j < e_columnCount; j++) {
+//            PolygonShape shape = new PolygonShape();
+//            shape.setAsBox(0.5f, 0.5f);
+//            FixtureDef fd = new FixtureDef();
+//            fd.shape = shape;
+//            fd.density = 1.0f;
+//            fd.friction = 0.3f;
+            CircleShape shape = new CircleShape();
+            shape.setRadius(1.0f);
+
+            FixtureDef fd = new FixtureDef();
+            fd.shape = shape;
+            fd.density = 1.0f;
+            fd.friction = 0.3f;
+            for (int i = 0; i < e_rowCount; i++) {
+                BodyDef bd = new BodyDef();
+                bd.type = BodyDef.BodyType.DynamicBody;
+                bd.position.set(10, 0.752f + 1.54f * i);
+                Body body = Constant.world.createBody(bd);
+                body.createFixture(fd);
+            }
+            shape.dispose();
+        }
+        m_bullet = null;
+    }
+
+    public void gavity2(){
+        {
+            BodyDef bd = new BodyDef();
+            Body ground = Constant.world.createBody(bd);
+            EdgeShape shape = new EdgeShape();
+            shape.set(new Vector2(-40, 0), new Vector2(40, 0));
+            ground.createFixture(shape, 0);
+            shape.dispose();
+        }
+        {
+            CircleShape shape = new CircleShape();
+            shape.setRadius(1.0f);
+
+            FixtureDef fd = new FixtureDef();
+            fd.shape = shape;
+            fd.density = 1.0f;
+            fd.friction = 0.3f;
+            for (int j = 0; j < 4; j++) {
+                for (int i = 0; i < e_count; i++) {
+                    BodyDef bd = new BodyDef();
+                    bd.type = BodyDef.BodyType.DynamicBody;
+                    bd.position.set(10, 4.0f + 6.0f * i);
+                    Body body = Constant.world.createBody(bd);
+                    body.createFixture(fd);
+                }
+            }
+//                 for (int i = 0; i < e_count*2; i++) {
+//                    BodyDef bd = new BodyDef();
+//                    bd.type = BodyDef.BodyType.DynamicBody;
+//                    bd.position.set(10, 4.0f + 6.0f * i);
+//                    Body body = Constant.world.createBody(bd);
+//                    body.createFixture(fd);
+//
+//
+//                }
+        }
+    }
+
 
     @Override
     public void act(float delta) {

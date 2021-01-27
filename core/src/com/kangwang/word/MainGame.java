@@ -24,7 +24,7 @@ public class MainGame extends Game {
         Box2D.init();
         Gdx.input.setCatchBackKey(true);
         assetManager = new AssetManager();
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewport = new ExtendViewport(30,20);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuSpriteBatch();
         Constant.world = world = new World(new Vector2(0,-90F),true);

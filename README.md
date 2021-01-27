@@ -69,6 +69,11 @@ float degrees = (float) Math.toDegrees(body.getAngle());
 ## 监听撞击
 
 ```
+分类 和 掩码
+
+分类： 分类我是谁
+掩码： 我撞击谁
+
 public class WorldContactListener implements ContactListener{
    @Override
     public void beginContact(Contact contact) {
@@ -94,12 +99,30 @@ public class WorldContactListener implements ContactListener{
 }
 ```
 
+存储数据
 
+``` 
+body.setUserData(object);
+```
 
+获取数据
 
+```
+Object userData = body.getUserData();
+```
 
+```
+float density = -1;     密度
+float friction = -1;    摩擦力
+float restitution = -1; 反馈
+```
 
+## Fixture
 
+```
+body.createFixture(shape, 1.0f);
+body.createFixture (FixtureDef def)
+```
 
 
 
