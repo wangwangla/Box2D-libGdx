@@ -12,6 +12,8 @@ public class Constant {
     public static float width;
     public static float hight;
 
+    public static int PPM = 10;
+
 
     public static final short BUTT_BIT = 1;
     public static final short WALL_BIT = 1 << 1;

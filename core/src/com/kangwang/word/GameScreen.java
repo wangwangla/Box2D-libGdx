@@ -51,7 +51,10 @@ class GameScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage();
+//        GameView view = new GameView();
+//        stage.addActor(view);
+//        Box2DDemo dDemo = new Box2DDemo();
+//        stage.addActor(dDemo);
         GameView view = new GameView();
         stage.addActor(view);
     }
