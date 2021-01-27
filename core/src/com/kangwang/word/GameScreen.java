@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.kangwang.pinghengche.PhcView;
 
 class GameScreen implements Screen {
     private Stage stage;
@@ -55,7 +56,10 @@ class GameScreen implements Screen {
 //        stage.addActor(view);
 //        Box2DDemo dDemo = new Box2DDemo();
 //        stage.addActor(dDemo);
-        GameView view = new GameView();
+//        GameView view = new GameView();
+//        stage.addActor(view);
+
+        PhcView view = new PhcView();
         stage.addActor(view);
     }
 

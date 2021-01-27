@@ -21,6 +21,12 @@ public class BodyImage extends Image {
     private float friction;
     private float restitution;
 
+    public BodyImage(TextureRegion region) {
+        super(region);
+        setSize(getWidth()/Constant.PPM,getHeight()/Constant.PPM);
+        setOrigin(Align.center);
+    }
+
     public float getDensity() {
         return density;
     }
@@ -43,12 +49,6 @@ public class BodyImage extends Image {
 
     public void setRestitution(float restitution) {
         this.restitution = restitution;
-    }
-
-    public BodyImage(TextureRegion region) {
-        super(region);
-        setSize(getWidth()/Constant.PPM,getHeight()/Constant.PPM);
-        setOrigin(Align.center);
     }
 
     public BodyDef.BodyType getType() {
