@@ -3,52 +3,35 @@ package com.kangwang.pinghengche;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.utils.Array;
 import com.kangwang.word.Constant;
 
-public class Box {
-    private float x;
-    private float y;
-    private float w;
-    private float h;
+public class Circle {
+    private float x ;
+    private float y ;
+    private float r ;
     public Body body;
-
-    public Box(float x,float y,float w, float h){
-        this(x,y,w,h,false);
-    }
-
-    public Box(float x,float y,float w, float h,boolean falg){
+    public Circle(float x,float y,float r){
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
+        this.r = r;
+
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(this.x,this.y);
 
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(this.w/2, this.h/2);
+
+        CircleShape polygonShape = new CircleShape();
+        polygonShape.setRadius(this.r);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1.0F;
         fixtureDef.friction = 0.5F;
         fixtureDef.restitution = 0.2f;
-
-        if (falg) {
-            fixtureDef.filter.maskBits = 0;
-            bodyDef.linearDamping = 0.1F;
-        }
-
         this.body = Constant.world.createBody(bodyDef);
         body.createFixture(fixtureDef);
-    }
-
-    public void display(){
-
     }
 
     private boolean deletion(){
@@ -59,8 +42,8 @@ public class Box {
         return false;
     }
 
-    public boolean contains(float x,float y){
-        Array<Fixture> fixtureList = body.getFixtureList();
-        return false;
+
+    public void display(){
+
     }
 }
