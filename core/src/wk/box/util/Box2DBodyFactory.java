@@ -1,4 +1,4 @@
-package com.kangwang.word;
+package wk.box.util;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -6,8 +6,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.kangwang.world.Constant;
 
-public class Box2DFactory {
+public class Box2DBodyFactory {
     private BodyDef.BodyType type = BodyDef.BodyType.StaticBody;
     private Vector2 position = new Vector2(0,0);
     private float width = 10;
@@ -18,18 +19,19 @@ public class Box2DFactory {
     private float density = -1;
     private float friction = -1;
     private float restitution = -1;
+    private boolean isSensor = false;
 
     public void reset(){
         type = BodyDef.BodyType.StaticBody;
         position = new Vector2(0,0);
-        float width = 10;
-        float height = 10;
-        Shape shape = null;
-        short categoryBits = -1;
-        short maskBits = -1;
-        float density = -1;
-        float friction = -1;
-        float restitution = -1;
+        width = 1;
+        height = 1;
+        shape = null;
+        categoryBits = -1;
+        maskBits = -1;
+        density = -1;
+        friction = -1;
+        restitution = -1;
     }
 
     public void setSize(float width,float height){
@@ -117,6 +119,14 @@ public class Box2DFactory {
         this.maskBits = maskBits;
     }
 
+    public boolean isSensor() {
+        return isSensor;
+    }
+
+    public void setSensor(boolean sensor) {
+        isSensor = sensor;
+    }
+
     public Body getBody(){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = this.type;
@@ -133,11 +143,15 @@ public class Box2DFactory {
         fixtureDef.density = density;
         fixtureDef.friction = friction;
         fixtureDef.restitution = restitution;
+        fixtureDef.isSensor = true;
         if (categoryBits != -1){
             fixtureDef.filter.categoryBits = categoryBits;
         }
         if (maskBits != -1) {
             fixtureDef.filter.maskBits = maskBits;
+        }
+        if (friction != -1){
+            fixtureDef.friction = friction;
         }
         body.createFixture(fixtureDef);
         shape.dispose();

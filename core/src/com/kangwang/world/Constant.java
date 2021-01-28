@@ -1,4 +1,4 @@
-package com.kangwang.word;
+package com.kangwang.world;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;

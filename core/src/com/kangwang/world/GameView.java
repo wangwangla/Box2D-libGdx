@@ -1,4 +1,4 @@
-package com.kangwang.word;
+package com.kangwang.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -26,35 +26,91 @@ public class GameView extends Group {
         Constant.world.setContactListener(new WorldListener());
         setSize(Constant.width,Constant.hight);
         //0,0为创建的左下角
-        Box2DFactory factory = new Box2DFactory();
+        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
         factory.setSize(Constant.width,1);
         factory.setDensity(0.5F);
         factory.setFriction(0.4F);
-        factory.getBody();
+        Body body = factory.getBody();
         factory.reset();
 
-        PolygonShape polygonShape = new PolygonShape();
-        Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(20, 0);
-        vertices[1] = new Vector2(20, 40);
-        vertices[2] = new Vector2(40, 0);
-        polygonShape.set(vertices);
-        factory.setShape(polygonShape);
-        factory.setRestitution(0.3F);
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        Body body = factory.getBody();
-        body.setTransform(0,0,0);
 
-        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
+
+        Vector2 linearVelocity = body.getLinearVelocity();
+        linearVelocity.nor();
+
+
+
+
+//        linearVelocity.mulAdd()
+
+
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//        body.setTransform(0,0,0);
+//        Array<Fixture> fixtureList = body.getFixtureList();
+
+
+
+
+//        Image image = new Image(new Texture("2.png"));
+//        addActor(image);
+
+
+        /**
+         * 缩放
+         */
+//        PolygonShape shape = (PolygonShape) body.getFixtureList().get(0).getShape();
+//        Vector2[] vertices1 = new Vector2[3];
+//        vertices1[0] = new Vector2(20, 0);
+//        vertices1[1] = new Vector2(20, 40);
+//        vertices1[2] = new Vector2(0, 0);
+//        shape.set(vertices1);
+
+
+        /**
+         * 方法二  没写好
+         */
+//        Vector2 vector2 = new Vector2();
+//        PolygonShape shape = (PolygonShape) body.getFixtureList().get(0).getShape();
+//        for (int i = 0; i < shape.getVertexCount(); i++) {
+//            shape.getVertex(i,vector2);
+//            vector2.mulAdd(new Vector2(30,30));
+//        }
+
+
+        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
         bodyImage.setPosition(10,60);
         bodyImage.createBox2DImage();
         bodyImage.getBody().setFixedRotation(false);
         addActor(bodyImage);
 
-
         /*********************************************/
 
 //        xx2();
+
+
+    }
+
+    @Override
+    public void act(float delta) {
+//        initKey();
+        super.act(delta);
+        Constant.world.step(1/60f, 6, 2);
+        Constant.renderer.render(Constant.world,Constant.combined);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+
+        super.draw(batch, parentAlpha);
     }
 
     private void initKey() {
@@ -70,7 +126,7 @@ public class GameView extends Group {
     }
 
     private void initRedis() {
-        BodyImage buut = new BodyImage(new TextureRegion(new Texture("2.png")));
+        com.kangwang.world.BodyImage buut = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
         buut.setSize(20,20);
         buut.setType(BodyDef.BodyType.DynamicBody);
         buut.setPosition(Constant.width/2,50,Align.bottom);
@@ -81,9 +137,9 @@ public class GameView extends Group {
         buut.getBody().setLinearVelocity(0,71);
         addActor(buut);
     }
-    BodyImage bottom;
+    com.kangwang.world.BodyImage bottom;
     private void initBottomBlack() {
-        bottom = new BodyImage(new TextureRegion(new Texture("1.png")));
+        bottom = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("1.png")));
         bottom.setSize(100,5);
         bottom.setPosition(Constant.width/2,20, Align.bottom);
         addActor(bottom);
@@ -99,7 +155,7 @@ public class GameView extends Group {
     public void initBlack(){
         float v = Constant.width / 10;
         for (int i = 0; i < 10; i++) {
-            BodyImage image = new BodyImage(new TextureRegion(new Texture("1.png")));
+            com.kangwang.world.BodyImage image = new BodyImage(new TextureRegion(new Texture("1.png")));
             image.setSize(v-3,v);
             image.setPosition(v*i+1.5F,Constant.hight - 10, Align.topLeft);
             addActor(image);
@@ -492,20 +548,5 @@ public class GameView extends Group {
 //
 //                }
         }
-    }
-
-
-    @Override
-    public void act(float delta) {
-//        initKey();
-        super.act(delta);
-
-        Constant.world.step(1/60f, 6, 2);
-        Constant.renderer.render(Constant.world,Constant.combined);
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
     }
 }

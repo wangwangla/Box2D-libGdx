@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.kangwang.word.Constant;
-import com.kangwang.word.MainGame;
+import com.kangwang.world.MainGame;
 
 public class PhcScreen implements Screen {
     private Stage stage;

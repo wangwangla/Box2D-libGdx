@@ -816,4 +816,25 @@ inline b2BodyType getBodyType( int type )
 	public void setUserData (Object userData) {
 		this.userData = userData;
 	}
+
+	//--------------------------------------
+    /**
+     *  add myself kw
+     */
+    interface Handler{
+        public void beginContactHanlder();
+    }
+
+    private Handler handler;
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public void handler(){
+        if (handler != null){
+            handler.beginContactHanlder();
+        }
+    }
+    //------------------------------------
 }

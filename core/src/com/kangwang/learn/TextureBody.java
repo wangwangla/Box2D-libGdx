@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
-import com.kangwang.word.Constant;
+import com.kangwang.world.Constant;
 
 public class TextureBody extends Image {
     public TextureBody (){

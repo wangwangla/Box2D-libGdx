@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.kangwang.world.MainGame;
 
 public class AndroidLauncher extends AndroidApplication {
 

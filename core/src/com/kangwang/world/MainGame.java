@@ -1,4 +1,4 @@
-package com.kangwang.word;
+package com.kangwang.world;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -29,7 +29,7 @@ public class MainGame extends Game {
         batch = new CpuSpriteBatch();
         Constant.world = world = new World(new Vector2(0,-90F),true);
         Constant.renderer = renderer = new Box2DDebugRenderer();
-        setScreen(new GameScreen(this));
+        setScreen(new com.kangwang.world.GameScreen(this));
     }
 
     public Batch getBatch() {

@@ -1,5 +1,6 @@
-package com.kangwang.word;
+package com.kangwang.world;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -129,6 +130,10 @@ public class BodyImage extends Image {
     @Override
     public void act(float delta) {
         super.act(delta);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
         if (body != null){
             if (body.getPosition().x != getX() || body.getPosition().y != getY()) {
                 setPosition(body.getPosition().x, body.getPosition().y,Align.center);
@@ -138,6 +143,8 @@ public class BodyImage extends Image {
                 setRotation(degrees);
             }
         }
+        super.draw(batch, parentAlpha);
+
     }
 
     public Body getBody() {

@@ -2,11 +2,10 @@ package com.kangwang.pinghengche;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.utils.Align;
-import com.kangwang.word.Constant;
+import com.kangwang.world.Constant;
 
 public class Box {
     private float x;
@@ -34,6 +33,11 @@ public class Box {
         fixtureDef.friction = 0.5F;
         fixtureDef.restitution = 0.2f;
         fixtureDef.filter.maskBits = 0;
+
+        Filter filter = fixtureDef.filter;
+
+
+
 //        fixtureDef.linearDamping = 0.1;
         body.createFixture(fixtureDef);
         polygonShape.dispose();

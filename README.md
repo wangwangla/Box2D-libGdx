@@ -208,31 +208,6 @@ Box2D中的Dynamics包下有一个b2Island类，类中有一个Solve方法，这
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 监听撞击
 
 ```
@@ -385,6 +360,248 @@ jointDef.initialize(body1,body2,new Vector2(Constant.width/2-100,500),new Vector
 
 
 ## 马达关节
+
+
+## 计算路径
+
+提前知道刚体运动的路径
+
+ a)刚体的位置,n个timestep后,刚体的位置,用于小鸟的轨迹.
+ b)计算刚体的最大高度,初始速度v0飞出后,可以到达的最大高度;
+ c)计算刚体到达某个位置需要的初始速度.
+ 
+
+### 计算刚体位置
+
+s = 1/2 * a * t * t;
+
+实际
+
+数列的总和
+
+间距  1/2 * n * (a1 + an)
+
+1/2 * n (a1 + a1 + an)  = 
+
+
+### 最大高度
+
+u = u0 + at
+
+
+### 计算初始速度
+
+
+ 
+
+
+
+
+## 刚体的Box2D缩放
+
+更改形状
+
+```
+//得到刚体,然后重新设置形状
+PolygonShape shape = (PolygonShape) body.getFixtureList().get(0).getShape();
+Vector2[] vertices1 = new Vector2[3];
+vertices1[0] = new Vector2(20, 0);
+vertices1[1] = new Vector2(20, 40);
+vertices1[2] = new Vector2(0, 0);
+polygonShape.set(vertices1);
+```
+
+## 获取碰撞点
+
+得到碰撞点的位置   通过b2Contact对象  得到碰撞信息
+
+GetManifold()获取相对于刚体的碰撞点本地坐标
+GetWorldManifold()舞台碰撞点的全局坐标
+
+
+```
+WorldManifold worldManifold = contact.getWorldManifold();
+Vector2 point = worldManifold.getPoints()[0];
+System.out.println(point.x+"-----------"+point.y);
+```
+
+BeginContact：当碰撞发生时触发该方法
+EndContact：当碰撞结束时触发该方法
+
+```
+灯具开始时调用
+public void beginContact(Contact contact) {
+   //得到stage的坐标
+    WorldManifold worldManifold = contact.getWorldManifold();
+    Vector2 point = worldManifold.getPoints()[0];
+    System.out.println(point.x+"-----------"+point.y);
+}
+
+停止时调用
+public void endContact(Contact contact) {
+
+}
+
+contact更新之后执行的方法  
+public void preSolve(Contact contact, Manifold oldManifold) {
+    //得到stage的坐标
+    WorldManifold worldManifold = contact.getWorldManifold();
+    Vector2 point = worldManifold.getPoints()[0];
+    System.out.println(point.x+"-----------"+point.y);
+}
+
+@Override
+public void postSolve(Contact contact, ContactImpulse impulse) {
+}
+```
+
+
+
+Contact:管理两个形状之间的接触。每个重叠AABB都有一个触点,因此可能存在没有接触点的接触对象
+
+## 无阻尼匀速运动
+
+Box2D物理引擎默认情况下，对世界b2World里的刚体都是模拟自由落体运动，并且因为摩擦力的影响，
+刚体会慢慢的停下来(在物理学上也叫做有阻尼运动)
+
+world = world = new b2World(new b2Vec2(0,0), true);  无重力   
+给一个反作用的力  消除重力
+
+SetLinearVelocity()设置速度 ，但是存在阻力
+
+不断的调整速度大小  不包括方向
+
+
+## isSensor属性创建感应区域
+
+设置刚体是不是参与物理模拟。  
+
+- false (default)  碰撞后进行反弹 或者 变向运动
+- truw 只会进行碰撞检测，并不会进行碰撞后的物理运动。
+
+比如下落，并不会撞击了地面就停止，而是撞击了地面会检测到，然后穿过去  只检测不执行
+
+## 碰撞进行分类
+
+Filter是”过滤”的意思
+FilterData可以简单的理解成用来过滤碰撞刚体(比如接下来哦我么要实现的矩形只与矩形刚体碰撞，圆形只与
+圆形刚体碰撞)。
+FilterData有3个属性：groupIndex、categoryBits和maskBits
+
+groupIndex : 刚体属于哪一个组   只与同组的发生碰撞
+categoryBits ： 必须是2的 n次方
+
+## Box2DDebugRenderer
+
+Box2DebugRenderer
+
+## 浮力效果
+
+刚开始接触的时候给一个浮力，占用的体力越大，浮力就越大，还会出现旋转的现象。
+
+ApplyForce  No 
+
+BuoyancyController
+
+
+···有空补···
+
+## 镜头跟随
+
+方式一：
+
+一个物体最左边，相机，背景不动，到达屏幕中央，相机开始跟随运动
+
+方式二：
+
+蚂蚁走到桌子中央的时候，桌子开始左边移动
+
+## 刚体碰撞处理函数
+
+```
+Fixture fixtureA = contact.getFixtureA();
+Fixture fixtureB = contact.getFixtureB();
+short categoryBits = fixtureA.getFilterData().categoryBits;
+short categoryBits1 = fixtureB.getFilterData().categoryBits;
+if (categoryBits == Constant.BUTT_BIT){
+    if (categoryBits1 == Constant.BLACK_BIT) {
+        fixtureA.getBody().setLinearVelocity(0, -71);
+    }else if (categoryBits1 == Constant.BUTTOM_BIT){
+        fixtureA.getBody().setLinearVelocity(0, 71);
+    }
+}else if (categoryBits1 == Constant.BUTT_BIT){
+    if (categoryBits == Constant.BLACK_BIT) {
+        fixtureB.getBody().setLinearVelocity(0, -71);
+    }else if (categoryBits == Constant.BUTTOM_BIT){
+        fixtureB.getBody().setLinearVelocity(0, 71);
+    }
+}
+```
+
+我们并不知道对方是谁，谁是我，需要不停的判断，所有可以自定义外部函数
+
+修改源码，在body源码加入方法
+/**
+ *  add myself kw
+ */
+interface Handler{
+    public void beginContactHanlder();
+}
+
+private Handler handler;
+
+public void setHandler(Handler handler) {
+    this.handler = handler;
+}
+
+public void handler(){
+    if (handler != null){
+        handler.beginContactHanlder();
+    }
+}
+ 
+ 
+
+## 刚体碰撞检测
+ 
+Box2D中获取碰撞对象的方法有两种。
+
+- 一个是通过world.GetContactList().bodyA和bodyB来获取碰撞双方；
+- 另外一个是自定义Box2D.Dynamics下的b2ContactListener类，侦听碰撞后的事件，然后做进一步的处理。
+ 
+
+Array<Contact> contactList = Constant.world.getContactList();
+System.out.println("====>>>>>");
+Fixture fixtureA = contactList.get(0).getFixtureA();
+Fixture fixtureB = contactList.get(0).getFixtureB();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
