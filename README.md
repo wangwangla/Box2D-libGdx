@@ -369,7 +369,7 @@ jointDef.initialize(body1,body2,new Vector2(Constant.width/2-100,500),new Vector
  a)刚体的位置,n个timestep后,刚体的位置,用于小鸟的轨迹.
  b)计算刚体的最大高度,初始速度v0飞出后,可以到达的最大高度;
  c)计算刚体到达某个位置需要的初始速度.
- 
+
 
 ### 计算刚体位置
 
@@ -388,12 +388,7 @@ s = 1/2 * a * t * t;
 
 u = u0 + at
 
-
 ### 计算初始速度
-
-
- 
-
 
 
 
@@ -491,9 +486,11 @@ FilterData有3个属性：groupIndex、categoryBits和maskBits
 groupIndex : 刚体属于哪一个组   只与同组的发生碰撞
 categoryBits ： 必须是2的 n次方
 
+maskBits：掩码就是我需要去注意谁
+
 ## Box2DDebugRenderer
 
-Box2DebugRenderer
+Box2DebugRenderer   这个类除了不绘制AABB,其他都绘制。
 
 ## 浮力效果
 
@@ -541,9 +538,11 @@ if (categoryBits == Constant.BUTT_BIT){
 我们并不知道对方是谁，谁是我，需要不停的判断，所有可以自定义外部函数
 
 修改源码，在body源码加入方法
+
+```java
 /**
  *  add myself kw
- */
+    */
 interface Handler{
     public void beginContactHanlder();
 }
@@ -559,27 +558,23 @@ public void handler(){
         handler.beginContactHanlder();
     }
 }
- 
+```
+
  
 
 ## 刚体碰撞检测
- 
+
 Box2D中获取碰撞对象的方法有两种。
 
 - 一个是通过world.GetContactList().bodyA和bodyB来获取碰撞双方；
 - 另外一个是自定义Box2D.Dynamics下的b2ContactListener类，侦听碰撞后的事件，然后做进一步的处理。
- 
 
+```java
 Array<Contact> contactList = Constant.world.getContactList();
 System.out.println("====>>>>>");
 Fixture fixtureA = contactList.get(0).getFixtureA();
 Fixture fixtureB = contactList.get(0).getFixtureB();
-
-
-
-
-
-
+```
 
 
 
