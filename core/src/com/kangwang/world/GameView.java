@@ -50,9 +50,9 @@ public class GameView extends Group {
 
         PolygonShape polygonShape = new PolygonShape();
         Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(20, 0);
-        vertices[1] = new Vector2(0, 40);
-        vertices[2] = new Vector2(0, 0);
+        vertices[0] = new Vector2(20 / Constant.PPM, 0);
+        vertices[1] = new Vector2(0, 40 / Constant.PPM);
+        vertices[2] = new Vector2(0, 0 / Constant.PPM);
         polygonShape.set(vertices);
         factory.setShape(polygonShape);
         factory.setRestitution(0.3F);
@@ -91,7 +91,7 @@ public class GameView extends Group {
 
 
         com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
-        bodyImage.setPosition(10,60);
+        bodyImage.setPosition(10 / Constant.PPM,60/Constant.PPM);
         bodyImage.createBox2DImage();
         bodyImage.getBody().setFixedRotation(false);
         addActor(bodyImage);

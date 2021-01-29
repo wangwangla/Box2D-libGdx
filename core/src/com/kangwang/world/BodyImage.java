@@ -24,7 +24,7 @@ public class BodyImage extends Image {
 
     public BodyImage(TextureRegion region) {
         super(region);
-        setSize(getWidth()/Constant.PPM,getHeight()/Constant.PPM);
+        setSize(getWidth(),getHeight());
         setOrigin(Align.center);
     }
 

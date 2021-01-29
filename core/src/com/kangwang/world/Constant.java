@@ -12,7 +12,7 @@ public class Constant {
     public static float width;
     public static float hight;
 
-    public static int PPM = 10;
+    public static float PPM = 1/10.0F;
 
 
     public static final short BUTT_BIT = 1;
