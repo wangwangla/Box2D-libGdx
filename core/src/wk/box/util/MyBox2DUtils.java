@@ -81,4 +81,30 @@ public class MyBox2DUtils {
         polygonShape.dispose();
         return body;
     }
+
+    public void createRedis(){
+        for (int i= 0; i < 50; i++) {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+            bodyDef.fixedRotation = false;
+            //定义形状需求
+            PolygonShape shape = new PolygonShape();
+            FixtureDef def = new FixtureDef();
+            //形状的密度、摩擦系数、反馈
+            def.density = 0;
+            def.friction = 0.3F;
+            def.restitution = 0.2F;
+            def.shape = shape;
+            //计算每个线段的角度、坐标
+            float angle = (float)(i/100.0F *Math.PI*2);
+            float bx = (float) (100 * Math.cos(angle));
+            float by = (float) (100 * Math.sin(angle));
+            //创建有方向的矩形刚体，合成总的圆形刚体
+            shape.setAsBox(5/30, 100/30, new Vector2(bx/30,by/30),angle);
+            bodyDef.position.set(bx+100,by+1000);
+            Body body = Constant.world.createBody(bodyDef);
+            //4.b2Body刚体工厂根据需求createShape生产形状
+            body.createFixture(def);
+        }
+    }
 }

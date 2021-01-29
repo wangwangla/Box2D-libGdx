@@ -18,14 +18,22 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
+import com.wuli.Demo01;
 
 public class GameView extends Group {
 
     public GameView(){
+
+        Demo01 demo01 = new Demo01();
+        addActor(demo01);
+
+//        ImageGroup group = new ImageGroup();
+//        addActor(group);
+
         /**********************斜面滑下***********************/
-        Constant.world.setContactListener(new WorldListener());
-        setSize(Constant.width,Constant.hight);
-        //0,0为创建的左下角
+//        Constant.world.setContactListener(new WorldListener());
+//        setSize(Constant.width,Constant.hight);
+//        //0,0为创建的左下角
         com.kangwang.world.Box2DFactory factory = new Box2DFactory();
         factory.setSize(Constant.width,1);
         factory.setDensity(0.5F);
@@ -34,7 +42,7 @@ public class GameView extends Group {
         factory.reset();
 
 
-        B2DSeparator b2DSeparator = new B2DSeparator();
+//        B2DSeparator b2DSeparator = new B2DSeparator();
 //        b2DSeparator.
 
 
@@ -60,6 +68,7 @@ public class GameView extends Group {
         Body body = factory.getBody();
         body.setTransform(0,0,0);
 //        Array<Fixture> fixtureList = body.getFixtureList();
+
 
 
 
@@ -107,7 +116,7 @@ public class GameView extends Group {
     public void act(float delta) {
 //        initKey();
         super.act(delta);
-        Constant.world.step(1/60f, 6, 2);
+        Constant.world.step(1/6f, 6, 2);
         Constant.renderer.render(Constant.world,Constant.combined);
     }
 

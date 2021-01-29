@@ -618,6 +618,19 @@ public int direction() {
 getWorldVector
 
 
+## 摩檫力和阻尼区别
+
+摩擦与速度无关，阻尼与速度有关,力的大小是速度的函数
+
+## 销毁
+
+
+
+
+
+
+
+
 
 
 
