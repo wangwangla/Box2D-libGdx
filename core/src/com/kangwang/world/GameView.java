@@ -30,13 +30,17 @@ public class GameView extends Group {
         factory.setSize(Constant.width,1);
         factory.setDensity(0.5F);
         factory.setFriction(0.4F);
-        Body body = factory.getBody();
+        factory.getBody();
         factory.reset();
 
 
+        B2DSeparator b2DSeparator = new B2DSeparator();
+//        b2DSeparator.
 
-        Vector2 linearVelocity = body.getLinearVelocity();
-        linearVelocity.nor();
+
+//       Vector2 linearVelocity = body.getLinearVelocity();
+//        linearVelocity.nor();
+
 
 
 
@@ -44,17 +48,17 @@ public class GameView extends Group {
 //        linearVelocity.mulAdd()
 
 
-//        PolygonShape polygonShape = new PolygonShape();
-//        Vector2[] vertices = new Vector2[3];
-//        vertices[0] = new Vector2(20, 0);
-//        vertices[1] = new Vector2(0, 40);
-//        vertices[2] = new Vector2(0, 0);
-//        polygonShape.set(vertices);
-//        factory.setShape(polygonShape);
-//        factory.setRestitution(0.3F);
-//        factory.setType(BodyDef.BodyType.DynamicBody);
-//        Body body = factory.getBody();
-//        body.setTransform(0,0,0);
+        PolygonShape polygonShape = new PolygonShape();
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(20, 0);
+        vertices[1] = new Vector2(0, 40);
+        vertices[2] = new Vector2(0, 0);
+        polygonShape.set(vertices);
+        factory.setShape(polygonShape);
+        factory.setRestitution(0.3F);
+        factory.setType(BodyDef.BodyType.DynamicBody);
+        Body body = factory.getBody();
+        body.setTransform(0,0,0);
 //        Array<Fixture> fixtureList = body.getFixtureList();
 
 

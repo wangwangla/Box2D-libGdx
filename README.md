@@ -450,8 +450,6 @@ public void postSolve(Contact contact, ContactImpulse impulse) {
 }
 ```
 
-
-
 Contact:管理两个形状之间的接触。每个重叠AABB都有一个触点,因此可能存在没有接触点的接触对象
 
 ## 无阻尼匀速运动
@@ -577,6 +575,47 @@ Fixture fixtureB = contactList.get(0).getFixtureB();
 ```
 
 
+
+
+
+
+
+
+## 补充
+
+获取局部点的世界速度。 *请注意，每次调用此方法时，都会返回相同的Vector2实例。
+
+getLinearVelocityFromLocalPoint (Vector2 localPoint)
+
+x y z 坐标，以刚体自身建立坐标系，刚体自身的方向位移
+
+```
+public int direction() {
+    final float tolerance = 0.2f;
+    if (getLocalVelocity().y < -tolerance) {
+        return DIRECTION_BACKWARD;
+    } else if (getLocalVelocity().y > tolerance) {
+        return DIRECTION_FORWARD;
+    } else {
+        return DIRECTION_NONE;
+    }
+}
+```
+
+获取公差的方式：
+
+- 获取局部点的世界速度。 *请注意，每次调用此方法时，都会返回相同的Vector2实例
+- 给定世界向量，获取局部向量。 *请注意，每次调用此方法时，都会返回相同的Vector2实例。
+    worldVector世界坐标中的向量，返回相应的局部向量。
+- getLocalVector 给定世界向量求局部向量
+    
+```
+ mBody.getLocalVector(mBody.getLinearVelocityFromLocalPoint(new Vector2(0, 0)));
+```
+
+## 根据局部坐标得到世界坐标
+
+getWorldVector
 
 
 
