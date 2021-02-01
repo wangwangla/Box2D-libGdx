@@ -14,26 +14,173 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.joints.MotorJointDef;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 public class GameView extends Group {
 
     public GameView(){
-        /**********************斜面滑下***********************/
         Constant.world.setContactListener(new WorldListener());
         setSize(Constant.width,Constant.hight);
         //0,0为创建的左下角
         com.kangwang.world.Box2DFactory factory = new Box2DFactory();
-        factory.setSize(Constant.width,1);
+        factory.setPosition(new Vector2(30,80));
+        factory.setType(BodyDef.BodyType.DynamicBody);
+        factory.setSize(20,20);
         factory.setDensity(0.5F);
         factory.setFriction(0.4F);
-        factory.getBody();
+        Body body1 = factory.getBody();
         factory.reset();
+        com.kangwang.world.Box2DFactory fac = new Box2DFactory();
+        fac.setPosition(new Vector2(30,30));
+        fac.setSize(20,20);
+        fac.setDensity(0.5F);
+        fac.setFriction(0.4F);
+        Body body2 = fac.getBody();
+        fac.reset();
+
+//        RevoluteJointDef def = new RevoluteJointDef();
+//        def.initialize(body1,body2,new Vector2(10,100));
+//        Constant.world.createJoint(def);
+
+        WheelJointDef def = new WheelJointDef();
+        def.initialize(body2,body1,new Vector2(10,100),
+                new Vector2(0,1));
+        def.enableMotor = true;
+        def.motorSpeed = 100;
+        def.maxMotorTorque = 10;
 
 
+
+        //
+        addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                def.motorSpeed = 100;
+            }
+        });
+
+//        MotorJointDef def = new MotorJointDef();
+//        def.initialize(body1,body2);
+//        def.linearOffset.set(100,200);
+//        def.maxForce = 10;
+        Constant.world.createJoint(def);
+
+
+    }
+
+        /**********************斜面滑下***********************/
+//        Constant.world.setContactListener(new WorldListener());
+//        setSize(Constant.width,Constant.hight);
+//        //0,0为创建的左下角
+//        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+//        factory.setSize(Constant.width,1);
+//        factory.setDensity(0.5F);
+//        factory.setFriction(0.4F);
+//        Body body1 = factory.getBody();
+//        factory.reset();
+//
+////
+//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        bodyImage.setPosition(10,60);
+//        Body box2DImage = bodyImage.createBox2DImage();
+//        bodyImage.getBody().setFixedRotation(false);
+//        addActor(bodyImage);
+//
+//
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setPosition(new Vector2(10,100));
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//
+//        PrismaticJointDef def = new PrismaticJointDef();
+//        def.initialize(box2DImage,body,new Vector2(20,100),new Vector2(20,100));
+//        Constant.world.createJoint(def);
+
+//        MouseJointDef def = new MouseJointDef();
+//        def.bodyA = body1;
+//        def.bodyB = box2DImage;
+//        def.target.set(30,10);
+//        def.frequencyHz = 0.2F;
+//
+//        Constant.world.createJoint(def);
+//
+//        addListener(new ClickListener(){
+//            @Override
+//            public boolean handle(Event e) {
+//                return super.handle(e);
+//            }
+//
+//            @Override
+//            public boolean mouseMoved(InputEvent event, float x, float y) {
+//
+//                return super.mouseMoved(event, x, y);
+//            }
+//
+//            @Override
+//            public boolean scrolled(InputEvent event, float x, float y, int amount) {
+//                return super.scrolled(event, x, y, amount);
+//            }
+//
+//            @Override
+//            public boolean keyDown(InputEvent event, int keycode) {
+//                return super.keyDown(event, keycode);
+//            }
+//
+//            @Override
+//            public boolean keyUp(InputEvent event, int keycode) {
+//                return super.keyUp(event, keycode);
+//            }
+//
+//            @Override
+//            public boolean keyTyped(InputEvent event, char character) {
+//                return super.keyTyped(event, character);
+//            }
+//        });
+
+
+//        RevoluteJointDef def = new RevoluteJointDef();
+//        def.initialize(box2DImage,body1,new Vector2(10,100));
+//        Constant.world.createJoint(def);
+
+
+//            //创建马达关节需求
+//            var revoluteJoint:b2RevoluteJointDef = new b2RevoluteJointDef();
+//            //用bodyA、bodyB和anchor节点初始化马达关节
+//            revoluteJoint.Initialize( bodyA, bodyB, new b2Vec2(posA.x / 30, posA.y / 30));
+//            //设置连接的两个刚体之间不进行碰撞检测
+//            revoluteJoint.collideConnected = false;
+//            //开启马达
+//            revoluteJoint.enableMotor = true;
+//            //设置马达的最大角速度，单位为 弧度/秒，如设置为Math.PI，即每秒钟转180度
+//            revoluteJoint.motorSpeed = Math.PI;
+//            //设置最大的扭力值
+//            revoluteJoint.maxMotorTorque = 500;
+//            //创建马达关节
+//            world.CreateJoint(revoluteJoint);
+
+//        DistanceJointDef def = new DistanceJointDef();
+//        def.initialize(body1,box2DImage,
+//                new Vector2(body1.getPosition().x,body1.getPosition().y),
+//                new Vector2(box2DImage.getPosition().x ,box2DImage.getPosition().y));
+//        Constant.world.createJoint(def);
         B2DSeparator b2DSeparator = new B2DSeparator();
 //        b2DSeparator.
 
@@ -48,20 +195,18 @@ public class GameView extends Group {
 //        linearVelocity.mulAdd()
 
 
-        PolygonShape polygonShape = new PolygonShape();
-        Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(20, 0);
-        vertices[1] = new Vector2(0, 40);
-        vertices[2] = new Vector2(0, 0);
-        polygonShape.set(vertices);
-        factory.setShape(polygonShape);
-        factory.setRestitution(0.3F);
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        Body body = factory.getBody();
-        body.setTransform(0,0,0);
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//        body.setTransform(0,0,0);
 //        Array<Fixture> fixtureList = body.getFixtureList();
-
-
 
 
 //        Image image = new Image(new Texture("2.png"));
@@ -89,19 +234,108 @@ public class GameView extends Group {
 //            vector2.mulAdd(new Vector2(30,30));
 //        }
 
-
-        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
-        bodyImage.setPosition(10,60);
-        bodyImage.createBox2DImage();
-        bodyImage.getBody().setFixedRotation(false);
-        addActor(bodyImage);
+//
+//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        bodyImage.setPosition(10,60);
+//        bodyImage.createBox2DImage();
+//        bodyImage.getBody().setFixedRotation(false);
+//        addActor(bodyImage);
 
         /*********************************************/
 
 //        xx2();
 
+//        test();
+//        PrismaticJointDemo pp =  new PrismaticJointDemo();
+//        pp.createWorld(Constant.world);
+
+    public void test(){
+        Constant.world.setContactListener(new WorldListener());
+        setSize(Constant.width,Constant.hight);
+        //0,0为创建的左下角
+        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+        factory.setSize(Constant.width,1);
+        factory.setDensity(0.5F);
+        factory.setFriction(0.4F);
+        Body body1 = factory.getBody();
+        factory.reset();
+
+
+        PolygonShape polygonShape = new PolygonShape();
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(20, 0);
+        vertices[1] = new Vector2(0, 40);
+        vertices[2] = new Vector2(0, 0);
+        polygonShape.set(vertices);
+        factory.setShape(polygonShape);
+        factory.setRestitution(0.3F);
+        factory.setType(BodyDef.BodyType.DynamicBody);
+        Body body = factory.getBody();
+        body.setTransform(0,0,0);
+
+        addListener(new ClickListener(){
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                MouseJointDef def = new MouseJointDef();
+//                def.bodyA = ;
+//                def.bodyB = hitBody;
+//                def.collideConnected = true;
+//                def.target.set(testPoint.x, testPoint.y);
+//                def.maxForce = 1000.0f * hitBody.getMass();
+//
+//                mouseJoint = (MouseJoint)world.createJoint(def);
+//                hitBody.setAwake(true);
+//                return super.touchDown(event, x, y, pointer, button);
+//            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+            }
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+            }
+        });
+//        Array<Fixture> fixtureList = body.getFixtureList();
+//
+//        com.kangwang.world.Box2DFactory factory1 = new Box2DFactory();
+//        factory1.setSize(10,100);
+//        Body body = factory1.getBody();
+//        factory1.reset();
+//
+//        com.kangwang.world.Box2DFactory factory2 = new Box2DFactory();
+//        factory2.setSize(10,100);
+//        factory2.setPosition(new Vector2(40,0));
+//        Body body2 = factory2.getBody();
+//        factory2.reset();
+
+//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        bodyImage.setPosition(10,60);
+//        Body box2DImage = bodyImage.createBox2DImage();
+//        bodyImage.getBody().setFixedRotation(false);
+//        addActor(bodyImage);
+
+
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setPosition(new Vector2(10,100));
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//
+//        PrismaticJointDef def = new PrismaticJointDef();
+//        def.initialize(body2,body,new Vector2(10,100),new Vector2(20,100));
+//        Constant.world.createJoint(def);
 
     }
+
 
     @Override
     public void act(float delta) {

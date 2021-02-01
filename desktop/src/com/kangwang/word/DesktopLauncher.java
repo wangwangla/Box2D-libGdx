@@ -8,6 +8,8 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.utils.Array;
 import com.kangwang.world.MainGame;
 
+import org.freyja.libgdx.cocostudio.ui.parser.widget.CCImageView;
+
 import java.io.File;
 
 public class DesktopLauncher {
@@ -17,6 +19,8 @@ public class DesktopLauncher {
         config.title = "wrod squares";
         config.width =360; //485
         config.height =640;
+        config.x = 0;
+        config.y = 0;
         new LwjglApplication(new MainGame(),config);
     }
 
