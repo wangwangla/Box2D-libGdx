@@ -67,6 +67,14 @@ public class WorldListener implements ContactListener {
 //        }
 
 
+        WorldManifold worldManifold1 = contact.getWorldManifold();
+        //碰撞点对应边对应的法向量
+        Vector2 normal = worldManifold.getNormal();
+        //碰撞点的坐标
+        Vector2[] points = worldManifold.getPoints();
+        //碰撞点鼠
+        int numberOfContactPoints = worldManifold.getNumberOfContactPoints();
+        float[] separations = worldManifold.getSeparations();
 
     }
 

@@ -130,9 +130,9 @@ public class Box2DFactory {
         }
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = density;
-        fixtureDef.friction = friction;
-        fixtureDef.restitution = restitution;
+//        fixtureDef.density = density;
+//        fixtureDef.friction = friction;
+//        fixtureDef.restitution = restitution;
 //        fixtureDef.isSensor = true;
         if (categoryBits != -1){
             fixtureDef.filter.categoryBits = categoryBits;
@@ -141,7 +141,7 @@ public class Box2DFactory {
             fixtureDef.filter.maskBits = maskBits;
         }
         body.createFixture(fixtureDef);
-        shape.dispose();
+//        shape.dispose();
         return body;
     }
 }

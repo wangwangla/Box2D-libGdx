@@ -27,7 +27,7 @@ public class MainGame extends Game {
         viewport = new ExtendViewport(72,128);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuSpriteBatch();
-        Constant.world = world = new World(new Vector2(0,-90F),true);
+        Constant.world = world = new World(new Vector2(0,-0),true);
         Constant.renderer = renderer = new Box2DDebugRenderer();
         setScreen(new com.kangwang.world.GameScreen(this));
     }
