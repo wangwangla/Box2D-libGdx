@@ -96,6 +96,7 @@ public class WorldListener implements ContactListener {
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
+        impulse.getNormalImpulses();  //垂直碰撞面
+        impulse.getTangentImpulses();  //平行碰撞面
     }
 }

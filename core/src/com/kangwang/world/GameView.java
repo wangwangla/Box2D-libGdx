@@ -14,69 +14,55 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.joints.MotorJointDef;
-import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
-import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.doc.demo.Demo03;
 
 public class GameView extends Group {
-
+    private Body body1;
     public GameView(){
-        Constant.world.setContactListener(new WorldListener());
-        setSize(Constant.width,Constant.hight);
-        //0,0为创建的左下角
-        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
-        factory.setPosition(new Vector2(30,80));
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        factory.setSize(20,20);
-        factory.setDensity(0.5F);
-        factory.setFriction(0.4F);
-        Body body1 = factory.getBody();
-        factory.reset();
-        com.kangwang.world.Box2DFactory fac = new Box2DFactory();
-        fac.setPosition(new Vector2(30,30));
-        fac.setSize(20,20);
-        fac.setDensity(0.5F);
-        fac.setFriction(0.4F);
-        Body body2 = fac.getBody();
-        fac.reset();
+        Demo03 demo03 = new Demo03();
+        addActor(demo03);
+
+//        Constant.world.setContactListener(new WorldListener());
+//        setSize(Constant.width,Constant.hight);
+//        //0,0为创建的左下角
+//        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+//        factory.setPosition(new Vector2(30,80));
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        factory.setSize(20,20);
+//        factory.setDensity(0.5F);
+//        factory.setFriction(0.4F);
+//        body1 = factory.getBody();
+//        factory.reset();
+//        com.kangwang.world.Box2DFactory fac = new Box2DFactory();
+//        fac.setPosition(new Vector2(30,30));
+//        fac.setSize(20,20);
+//        fac.setType(BodyDef.BodyType.DynamicBody);
+//        fac.setDensity(0.5F);
+//        fac.setFriction(0.4F);
+//        Body body2 = fac.getBody();
+//        fac.reset();
 
 //        RevoluteJointDef def = new RevoluteJointDef();
 //        def.initialize(body1,body2,new Vector2(10,100));
 //        Constant.world.createJoint(def);
 
-        WheelJointDef def = new WheelJointDef();
-        def.initialize(body2,body1,new Vector2(10,100),
-                new Vector2(0,1));
-        def.enableMotor = true;
-        def.motorSpeed = 100;
-        def.maxMotorTorque = 10;
+//        WheelJointDef def = new WheelJointDef();
+//        def.initialize(body2,body1,new Vector2(10,100),
+//                new Vector2(0,1));
+//        def.enableMotor = true;
+//        def.motorSpeed = 100;
+//        def.maxMotorTorque = 10;
 
-
-
-        //
-        addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                def.motorSpeed = 100;
-            }
-        });
 
 //        MotorJointDef def = new MotorJointDef();
 //        def.initialize(body1,body2);
 //        def.linearOffset.set(100,200);
 //        def.maxForce = 10;
-        Constant.world.createJoint(def);
-
-
+//        Constant.world.createJoint(def);
     }
 
         /**********************斜面滑下***********************/
@@ -181,7 +167,7 @@ public class GameView extends Group {
 //                new Vector2(body1.getPosition().x,body1.getPosition().y),
 //                new Vector2(box2DImage.getPosition().x ,box2DImage.getPosition().y));
 //        Constant.world.createJoint(def);
-        B2DSeparator b2DSeparator = new B2DSeparator();
+//        B2DSeparator b2DSeparator = new B2DSeparator();
 //        b2DSeparator.
 
 
@@ -250,30 +236,30 @@ public class GameView extends Group {
 //        pp.createWorld(Constant.world);
 
     public void test(){
-        Constant.world.setContactListener(new WorldListener());
-        setSize(Constant.width,Constant.hight);
-        //0,0为创建的左下角
-        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
-        factory.setSize(Constant.width,1);
-        factory.setDensity(0.5F);
-        factory.setFriction(0.4F);
-        Body body1 = factory.getBody();
-        factory.reset();
+//        Constant.world.setContactListener(new WorldListener());
+//        setSize(Constant.width,Constant.hight);
+//        //0,0为创建的左下角
+//        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+//        factory.setSize(Constant.width,1);
+//        factory.setDensity(0.5F);
+//        factory.setFriction(0.4F);
+//        Body body1 = factory.getBody();
+//        factory.reset();
+//
+//
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//        body.setTransform(0,0,0);
 
-
-        PolygonShape polygonShape = new PolygonShape();
-        Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(20, 0);
-        vertices[1] = new Vector2(0, 40);
-        vertices[2] = new Vector2(0, 0);
-        polygonShape.set(vertices);
-        factory.setShape(polygonShape);
-        factory.setRestitution(0.3F);
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        Body body = factory.getBody();
-        body.setTransform(0,0,0);
-
-        addListener(new ClickListener(){
+//        addListener(new ClickListener(){
 //            @Override
 //            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 //                MouseJointDef def = new MouseJointDef();
@@ -287,17 +273,17 @@ public class GameView extends Group {
 //                hitBody.setAwake(true);
 //                return super.touchDown(event, x, y, pointer, button);
 //            }
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-            }
-
-            @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                super.touchDragged(event, x, y, pointer);
-            }
-        });
+//
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                super.clicked(event, x, y);
+//            }
+//
+//            @Override
+//            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+//                super.touchDragged(event, x, y, pointer);
+//            }
+//        });
 //        Array<Fixture> fixtureList = body.getFixtureList();
 //
 //        com.kangwang.world.Box2DFactory factory1 = new Box2DFactory();
@@ -334,6 +320,7 @@ public class GameView extends Group {
 //        def.initialize(body2,body,new Vector2(10,100),new Vector2(20,100));
 //        Constant.world.createJoint(def);
 
+        Demo03 demo03 = new Demo03();
     }
 
 
@@ -341,8 +328,10 @@ public class GameView extends Group {
     public void act(float delta) {
 //        initKey();
         super.act(delta);
+
         Constant.world.step(1/60f, 6, 2);
         Constant.renderer.render(Constant.world,Constant.combined);
+//        body1.applyForceToCenter(body1.getWorldVector(new Vector2(100,100)),true);
     }
 
     @Override
