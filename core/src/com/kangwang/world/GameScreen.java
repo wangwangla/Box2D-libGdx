@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.doc.demo.Demo02;
 
 class GameScreen implements Screen {
     private Stage stage;
@@ -56,15 +55,14 @@ class GameScreen implements Screen {
 //        stage.addActor(view);
 //        Box2DDemo dDemo = new Box2DDemo();
 //        stage.addActor(dDemo);
-//        GameView view = new GameView();
-//        stage.addActor(view);
+        GameView view = new GameView();
+        stage.addActor(view);
 //        PhcView view = new PhcView();
 //        stage.addActor(view);
 //        Demo01 demo01 = new Demo01();
 //        stage.addActor(demo01);
-
-        Demo02 demo02 = new Demo02();
-        stage.addActor(demo02);
+//        Demo02 demo02 = new Demo02();
+//        stage.addActor(demo02);
     }
 
     @Override

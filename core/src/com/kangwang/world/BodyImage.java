@@ -100,7 +100,7 @@ public class BodyImage extends Image {
         this.maskBits = maskBits;
     }
 
-    public void createBox2DImage(){
+    public Body createBox2DImage(){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = this.type;
         bodyDef.position.set(getX(Align.center),getY(Align.center));
@@ -123,6 +123,7 @@ public class BodyImage extends Image {
         body.createFixture(fixtureDef);
         shape.dispose();
         body.setUserData(this);
+        return body;
     }
 
     float degrees;

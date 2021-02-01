@@ -16,16 +16,38 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
-import com.wuli.Demo01;
 
 public class GameView extends Group {
 
     public GameView(){
 
-        Demo01 demo01 = new Demo01();
-        addActor(demo01);
+        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+        factory.setSize(Constant.width,1);
+        factory.setDensity(0.5F);
+        factory.setFriction(0.4F);
+        Body body = factory.getBody();
+        factory.reset();
+
+        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+        bodyImage.setPosition(10,60);
+        Body box2DImage = bodyImage.createBox2DImage();
+        bodyImage.getBody().setFixedRotation(false);
+        addActor(bodyImage);
+
+        RevoluteJointDef def = new RevoluteJointDef();
+        def.initialize(body,box2DImage,new Vector2(10,60));
+
+        def.enableMotor = true;
+        def.motorSpeed = (float) 0;
+        def.maxMotorTorque = 0;
+
+        Constant.world.createJoint(def);
+
+//        Demo01 demo01 = new Demo01();
+//        addActor(demo01);
 
 //        ImageGroup group = new ImageGroup();
 //        addActor(group);
@@ -34,12 +56,12 @@ public class GameView extends Group {
 //        Constant.world.setContactListener(new WorldListener());
 //        setSize(Constant.width,Constant.hight);
 //        //0,0为创建的左下角
-        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
-        factory.setSize(Constant.width,1);
-        factory.setDensity(0.5F);
-        factory.setFriction(0.4F);
-        factory.getBody();
-        factory.reset();
+//        com.kangwang.world.Box2DFactory factory = new Box2DFactory();
+//        factory.setSize(Constant.width,1);
+//        factory.setDensity(0.5F);
+//        factory.setFriction(0.4F);
+//        factory.getBody();
+//        factory.reset();
 
 
 //        B2DSeparator b2DSeparator = new B2DSeparator();
@@ -56,17 +78,17 @@ public class GameView extends Group {
 //        linearVelocity.mulAdd()
 
 
-        PolygonShape polygonShape = new PolygonShape();
-        Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(20, 0);
-        vertices[1] = new Vector2(0, 40);
-        vertices[2] = new Vector2(0, 0);
-        polygonShape.set(vertices);
-        factory.setShape(polygonShape);
-        factory.setRestitution(0.3F);
-        factory.setType(BodyDef.BodyType.DynamicBody);
-        Body body = factory.getBody();
-        body.setTransform(0,0,0);
+//        PolygonShape polygonShape = new PolygonShape();
+//        Vector2[] vertices = new Vector2[3];
+//        vertices[0] = new Vector2(20, 0);
+//        vertices[1] = new Vector2(0, 40);
+//        vertices[2] = new Vector2(0, 0);
+//        polygonShape.set(vertices);
+//        factory.setShape(polygonShape);
+//        factory.setRestitution(0.3F);
+//        factory.setType(BodyDef.BodyType.DynamicBody);
+//        Body body = factory.getBody();
+//        body.setTransform(0,0,0);
 //        Array<Fixture> fixtureList = body.getFixtureList();
 
 
@@ -99,11 +121,11 @@ public class GameView extends Group {
 //        }
 
 
-        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
-        bodyImage.setPosition(10,60);
-        bodyImage.createBox2DImage();
-        bodyImage.getBody().setFixedRotation(false);
-        addActor(bodyImage);
+//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        bodyImage.setPosition(10,60);
+//        bodyImage.createBox2DImage();
+//        bodyImage.getBody().setFixedRotation(false);
+//        addActor(bodyImage);
 
         /*********************************************/
 
@@ -116,7 +138,7 @@ public class GameView extends Group {
     public void act(float delta) {
 //        initKey();
         super.act(delta);
-        Constant.world.step(1/6f, 6, 2);
+        Constant.world.step(1/60f, 6, 2);
         Constant.renderer.render(Constant.world,Constant.combined);
     }
 
