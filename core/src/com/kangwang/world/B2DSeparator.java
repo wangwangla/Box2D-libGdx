@@ -41,11 +41,11 @@ public class B2DSeparator {
 //     * @see b2Fixture
      * */
 
-    private static final float PPM = 100;
+    private static final float PPM = 1;
 
     public void separate(Body body, FixtureDef fixtureDef, Vector2[] verticesVec)
     {
-        float scale = 30;
+        float scale = 1;
         int i, j, m;
         int n = verticesVec.length;
         ArrayList<Vector2> vec = new ArrayList<Vector2>();

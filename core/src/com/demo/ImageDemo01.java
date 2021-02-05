@@ -23,26 +23,7 @@ public class ImageDemo01 extends Group {
         x = 0;
         y = 0;
         vertices = new float[2000];
-        final float fx2 = x + region.getRegionWidth();
-        final float fy2 = y + region.getRegionHeight();
-
-
         int idx = this.idx;
-//        vertices[idx] = 100;
-//        vertices[idx + 1] = 100;
-//
-//        vertices[idx + 2] = 100;
-//        vertices[idx + 3] = 0;
-//
-//        vertices[idx + 4] = 0;
-//        vertices[idx + 5] = 100;
-//
-//        vertices[idx + 6] = 100;
-//        vertices[idx + 7] = 200;
-//
-//        vertices[idx + 8] = 200;
-//        vertices[idx + 9] = 100;
-
 
         for (float i = 0; i <= 360; i=i+0.5F) {
             vertices[idx ++] = (float) (100+ 100*Math.sin(i));
@@ -56,9 +37,6 @@ public class ImageDemo01 extends Group {
             tri[3*i+1] = (short) i;
             tri[3*i+2] = (short) (i+1);
         }
-
-
-
 
         PolygonRegion = new PolygonRegion(region,vertices,tri);
         sprite = new PolygonSprite(PolygonRegion);

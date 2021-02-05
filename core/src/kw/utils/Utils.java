@@ -16,16 +16,16 @@ public class Utils {
         Body body = Constant.world.createBody(bodyDef);
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(boxWidth, boxHeight);
-        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 3;
         fixtureDef.friction = 0.3F;
         fixtureDef.restitution = 0.2F;
-        body.createFixture(fixtureDef);
+//        body.createFixture(fixtureDef);
         polygonShape.dispose();
         return body;
     }
-
+    public FixtureDef fixtureDef;
     public Body createRadio(float posX, float posY, float boxWidth, float boxHeight, boolean isStatic){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = isStatic? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody;
