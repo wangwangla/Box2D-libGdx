@@ -62,7 +62,12 @@ public class SpriteBatch implements Batch {
 	private ShaderProgram customShader = null;
 	private boolean ownsShader;
 
-	float color = Color.WHITE.toFloatBits();
+
+    public Mesh getMesh() {
+        return mesh;
+    }
+
+    float color = Color.WHITE.toFloatBits();
 	private Color tempColor = new Color(1, 1, 1, 1);
 
 	/** Number of render calls since the last {@link #begin()}. **/

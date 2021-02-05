@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
+import com.badlogic.gdx.graphics.g2d.CpuPolygonSpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -26,9 +26,21 @@ public class MainGame extends Game {
         assetManager = new AssetManager();
         viewport = new ExtendViewport(72,128);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        batch = new CpuSpriteBatch();
-        Constant.world = world = new World(new Vector2(0,-0),true);
-        Constant.renderer = renderer = new Box2DDebugRenderer();
+        batch = new CpuPolygonSpriteBatch();
+
+
+
+        Vector2 vector2 = new Vector2(0,-10);
+        Constant.world = world = new World(vector2,true);
+
+//        Constant.renderer = renderer = new Box2DDebugRenderer();
+
+        Constant.renderer = renderer = new Box2DDebugRenderer(true,
+                false,
+                false,
+                false,
+                false,
+                true);
         setScreen(new com.kangwang.world.GameScreen(this));
     }
 

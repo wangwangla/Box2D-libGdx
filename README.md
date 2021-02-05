@@ -625,6 +625,10 @@ getWorldVector
 ## 销毁
 
 
+## 設置位置
+
+this.body.setTransform(new Vector2(20,20),10);
+
 
 
 

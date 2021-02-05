@@ -16,10 +16,10 @@
 
 package com.badlogic.gdx.math;
 
-import java.io.Serializable;
-
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.NumberUtils;
+
+import java.io.Serializable;
 
 /** Encapsulates a 2D vector. Allows chaining methods by returning a reference to itself
  * @author badlogicgames@gmail.com */
@@ -179,6 +179,9 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 		return this;
 	}
 
+	//旋转角度
+//    public Vector2 mulQZ()
+
 	@Override
 	public Vector2 mulAdd (Vector2 vec, Vector2 mulVec) {
 		this.x += vec.x * mulVec.x;
@@ -198,6 +201,22 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 		final float y_d = v.y - y;
 		return (float)Math.sqrt(x_d * x_d + y_d * y_d);
 	}
+
+	public Vector2 subtract(Vector2 a,Vector2 b){
+	    return new Vector2(a.x-b.x,a.y-b.y);
+    }
+
+    public Vector2 multipy(float scale){
+	    this.x *= scale;
+	    this.y *= scale;
+	    return this;
+    }
+
+    public Vector2 multipy1(float scale){
+        this.x *= scale;
+        this.y *= scale;
+        return this;
+    }
 
 	/** @param x The x-component of the other vector
 	 * @param y The y-component of the other vector
@@ -329,6 +348,12 @@ public class Vector2 implements Serializable, Vector<Vector2> {
 	public float angle (Vector2 reference) {
 		return (float)Math.atan2(crs(reference), dot(reference)) * MathUtils.radiansToDegrees;
 	}
+
+	public Vector2 getAngleToVec(float x){
+        this.x = (float) (1*Math.cos(x));
+        this.y = (float) (1*Math.sin(x));
+        return this;
+    }
 
 	/** @return the angle in radians of this vector (point) relative to the x-axis. Angles are towards the positive y-axis.
 	 *         (typically counter-clockwise) */

@@ -18,14 +18,48 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
+import com.demo.ImageDemo01;
 import com.doc.demo.Demo03;
 
 public class GameView extends Group {
-    private Body body1;
-    public GameView(){
-        Demo03 demo03 = new Demo03();
-        addActor(demo03);
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
 
+    public GameView(){
+//        Demo01 demo01 = new Demo01();
+//        addActor(demo01);
+//        kw.chapter03.Demo03 demo02 = new kw.chapter03.Demo03();
+//        addActor(demo02);
+        ImageDemo01 demo = new ImageDemo01();
+        addActor(demo);
+
+//        ImageDemo demo = new ImageDemo();
+//        addActor(demo);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void iix(){
+        //        Demo03 demo03 = new Demo03();
+//        addActor(demo03);
+
+//        Demo08 demo06 = new Demo08();
+//        addActor(demo06);
 //        Constant.world.setContactListener(new WorldListener());
 //        setSize(Constant.width,Constant.hight);
 //        //0,0为创建的左下角
@@ -324,15 +358,6 @@ public class GameView extends Group {
     }
 
 
-    @Override
-    public void act(float delta) {
-//        initKey();
-        super.act(delta);
-
-        Constant.world.step(1/60f, 6, 2);
-        Constant.renderer.render(Constant.world,Constant.combined);
-//        body1.applyForceToCenter(body1.getWorldVector(new Vector2(100,100)),true);
-    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

@@ -259,7 +259,13 @@ public class PolygonSprite {
 
 	public void draw (PolygonSpriteBatch spriteBatch) {
 		final PolygonRegion region = this.region;
-		spriteBatch.draw(region.region.texture, getVertices(), 0, vertices.length, region.triangles, 0, region.triangles.length);
+		spriteBatch.draw(region.region.texture,
+                getVertices(),
+                0,
+                vertices.length,
+                region.triangles,
+                0,
+                region.triangles.length);
 	}
 
 	public void draw (PolygonSpriteBatch spriteBatch, float alphaModulation) {
