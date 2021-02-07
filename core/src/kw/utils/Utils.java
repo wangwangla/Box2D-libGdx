@@ -21,7 +21,7 @@ public class Utils {
         fixtureDef.density = 3;
         fixtureDef.friction = 0.3F;
         fixtureDef.restitution = 0.2F;
-//        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
         polygonShape.dispose();
         return body;
     }

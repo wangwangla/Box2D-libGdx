@@ -28,9 +28,7 @@ public class MainGame extends Game {
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuPolygonSpriteBatch();
 
-
-
-        Vector2 vector2 = new Vector2(0,-10);
+        Vector2 vector2 = new Vector2(0,-10.0F);
         Constant.world = world = new World(vector2,true);
 
 //        Constant.renderer = renderer = new Box2DDebugRenderer();

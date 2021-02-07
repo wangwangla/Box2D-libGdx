@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
 import com.doc.demo.Demo03;
 
-import kw.other.Demo01;
+import kw.chapter05.Demo01;
 
 public class GameView extends Group {
     @Override
@@ -29,6 +29,7 @@ public class GameView extends Group {
     }
 
     public GameView(){
+        setSize(Constant.width,Constant.hight);
 //        Demo01 demo01 = new Demo01();
 //        addActor(demo01);
 //        kw.chapter03.Demo03 demo02 = new kw.chapter03.Demo03();
@@ -38,6 +39,12 @@ public class GameView extends Group {
 
 //        ImageDemo demo = new ImageDemo();
 //        addActor(demo);
+//        Demo01 demo01 = new Demo01();
+//        addActor(demo01);
+
+//        Game02 game01 = new Game02();
+//        addActor(game01);
+
         Demo01 demo01 = new Demo01();
         addActor(demo01);
     }
