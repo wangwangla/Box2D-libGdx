@@ -80,6 +80,8 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
+更加详细的看doc目录，正在完善，随后完善案例
+
 ## git
 
 ```git
