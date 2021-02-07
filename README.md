@@ -1,15 +1,23 @@
-#Box 2d 
+# Box 2d
 
-## git 
+[TOC]
 
+
+
+## git
+
+```git
 git init 
 git add ./
 git commit -m "提交"
 git push origin master
+```
 
-## box2d
+## 初始化box2d
 
-- 积分步
+### 参数
+
+#### 积分步
 
 Box2D是由一些代码构成的积分器，积分器在离散点上做模拟物理运算，它将与游戏动画循环一同运行（时间步的作用）
 物理的计算需要60帧
@@ -18,7 +26,7 @@ Box2D是由一些代码构成的积分器，积分器在离散点上做模拟物
 处理办法：迭代多次   box2D建议是10次
 少的迭代会增加性能降低精度      一个时间步遍历10次约束。
 
-- Api
+### Api
 
 公差保证其工作  Box2D可以处理0.1到10米之间的移动物体
 
@@ -46,21 +54,20 @@ body.createFixture(fixtureDef);
 shape.dispose();
 ```
 
-- 世界刷新
+### 世界刷新
 
 ```
 Constant.world.step(1/60f, 6, 2);
 Constant.renderer.render(Constant.world,Constant.combined);
 ```
 
-- 角度转换
+### 角度转换
 
 ```
 float degrees = (float) Math.toDegrees(body.getAngle());
 ```
 
 如果和精灵绑定，如果需要旋转，需要设置旋转的位置中心点。
-
 
 ## 力
 
@@ -146,10 +153,9 @@ image.setSize(100,100);
 body.setUserData(image);
 ```
 
-将数据存储在body里面，需要属于到时候在将值取出来。
+将数据存储在body里面，需要属于到时候在将值取出来。一般可以将纹理存储在刚体中，使用的时候从刚体中取出，然后渲染。
 
-
-## 移動鼠標
+## 移動鼠標（这个demo没有弄好,没写出来）
 
 MouseJointDef def = new MouseJointDef();
 def.bodyA :一个
@@ -157,23 +163,16 @@ def.bodyB :另一个
 def.maxForce : 限制鼠标关节上的最大的力 这里通常需要乘以刚体的
 质量multiplier * mass * gravity
 
-### 鼠标是不是划过物体
-
-
-
-
-
 ## 自定义重力
 
 重力是一个向下的力，但是热气球可以在空中。
 
-实现方法有两种：一、加减法抵消重力；二、重置重力。下面我们来详细一下这两种方法。
+实现方法有两种：一、加减法抵消重力；二、重置重力。下面我们来详细一下这两种方法。简单说就是将力消除掉。
 
 有方向  有大小的力  重力 = 质量 * 重力加速度
 
 得到身体的总质量。 * @返回质量，通常以千克（kg）为单位。
 body.getMass();
-
 
 //获取身体的质量数据。 * @返回包含身体质量，惯性和中心的结构
 body.getMassData();
@@ -187,7 +186,7 @@ public class MassData {
 	public final Vector2 center = new Vector2();
 
 	/** The rotational inertia of the shape about the local origin. **/
-	public float I;
+	public float I;  //惯性
 }
 
 ```
@@ -197,7 +196,6 @@ public class MassData {
 ```
 body.ApplyForce(new b2Vec2(0, -10*body.GetMass()),body.GetWorldCenter());
 ```
-
 
 Box2D中的Dynamics包下有一个b2Island类，类中有一个Solve方法，这方法通过gravity形参对刚体进行
 重力模拟，代码如下：
@@ -259,6 +257,22 @@ float friction = -1;    摩擦力
 float restitution = -1; 反馈
 ```
 
+## 像素
+
+Box2D使用MKS单位和弧度表示角度，通常使用像素作为单位的，只需要使用openGl视口缩放世界缩放的屏幕空间。
+
+```
+float lowerX=-25.0f, upperX=25.0f, lowerY=-5.0f, upperY=25.0f;
+gluOrtho2D(lowerX, upperX, lowerY, upperY);
+```
+
+如果游戏为像素，那么及家具从像素转换为米，同时，将Box2D接收到的值从米转换为像素。
+
+```java
+xMeters=0.02f*xPixels;yMeters=0.02f*yPixels;
+xPixels=50.0华氏度 *xMeters;yPixels=50.0华氏度 *yMeters;
+```
+
 ## Fixture
 
 ```
@@ -267,11 +281,13 @@ body.createFixture (FixtureDef def)
 ```
 
 
+
 ## 认识
 
 Box2d是通过b2AABB表示的
 Box2D中的大小是通过设置两个对角顶点upperBound和lowerBound实现的
 对于静止不动的就设置睡着。
+
 ```
 创建世界
 ```
@@ -301,10 +317,6 @@ Constant.renderer.render(Constant.world,Constant.combined);
 
 那条线可以可以标示圆形刚体的角度，灰色表示刚体静止，不参与Box2D模拟计算，红色表示刚体
 为运动的，要进行物理模拟计算，专业分类可以节省CPU开支。
-
-
-
-
 
 
 ## 关节
@@ -574,11 +586,148 @@ Fixture fixtureA = contactList.get(0).getFixtureA();
 Fixture fixtureB = contactList.get(0).getFixtureB();
 ```
 
+# 关节
+
+box2d会通过关节将两个刚体绑在一起，使得两个刚体运动在关节的作用下相互制约相互影响形成有规律的运动。
+box2Joint的创建方法
+
+- 创建def对象，通过设置属性进行创建
+
+```java
+RevoluteJointDef def = new RevoluteJointDef();
+def.initialize(box2DImage,body1,new Vector2(10,100));
+Constant.world.createJoint(def);
+```
+
+说明：Joint and JointDef不会直接创建，它们是虚拟的抽象类，作为父类代码的多态和重构。
+
+属性：
+
+- BodyA
+- BodyB
+- CollideConnected:表示关节链接的两个物体之间是否可以发生碰撞模拟，默认为false,不发生碰撞，可以穿透 
+
+### 关节的属性
+
+- enableMotor：是否开启马达属性  默认false
+- motorSpeed：在刚体运懂情况下，可以到达的最大线速度和最大角速度。
+- maxMotorTorque:关节可以施加最大的力。
+
+这个过程中，刚体的角速度和线速度会一直增加，直到motorSpeed属性
+另一个属性可以作为旋转摩檫力使用，设置motorspeed属性值为0，maxMotorTorque作用会阻止刚体在原来的状态，直到外力大于maxMotorToorque属性
+
+弹簧属性：
+
+- frequencyHz和damping属性，运行刚体在运动时偏离节点，偏移后会收到一个力，使得它可以回到原来的位置。所以这两个属性就会在影响它。
+- frequencyHz:弹簧系统的震动频率，可以看作时弹簧的弹性系数，系数越大，回归的系数就越大。
+- dempingRaio:刚体回归节点收到的阻尼，0~1，值越大，阻力越大。
+
+不常使用的
+
+- GetReactionForce()
+- GetReactionTorque()
+
+## 鼠标关节
+
+和鼠标是有关联的，可以实现鼠标的拖拽
+
+- bodyA:一个空刚体
+- bodyB:另一个
+- target:创建关节时，target时bodyB被拖动收到前置的本地锚点，bodyB可以绕着旋转，他是目标位置，
+- maxForce:鼠标关节拖拽bodyB时，施加最大的作用力
+
+## PrismaticJointDef
+
+```java
+vector2 axis = new Vector2(6, 0);
+//            axis.nor();
+//bodyA 固定转轴
+//bodyB 运动的
+//开始位置
+//方向    axis的值，确定了从开始到结束的夹角
+pjd.initialize(ground, body, new Vector2(0, 0), axis);
+
+pjd.motorSpeed = 10.0f;
+pjd.maxMotorForce = 10000.0f;
+pjd.enableMotor = true;
+pjd.lowerTranslation = 0;
+pjd.upperTranslation = 20.0f;
+pjd.enableLimit = true;
+m_joint = (PrismaticJoint)world.createJoint(pjd);
+```
+
+### 夹角的确定
+
+axis点和anchor的夹角，作用只的大小没有太大意义的。
+
+内部做了许多的计算 模拟  所以值比较大容易造成抖动
+
+解决方法：将axis直接做成夹角就可以了 axis.nor();转换为向量。
+夹角与固定的保持不变，也就是bodyA保持相对不变，bodyA变化了，夹角也会随着变化。
+
+上面主要对角度进行了控制，下来我们对他的范围也进行控制，axis指定了角度，然后按照角度会不断的延申，为了不超出去
+
+- enablLimit:对刚体移动范围是否进行约束，默认为false,true就表示将范围限制在
+  
+    - lowerTranslation
+    - upperTranlation
+    
+
+要求：upper大于lower
+
+- referenceAngle：角度差距，他的用法使用三张图来看
+
+  ![image-20210131091157949](image/image-20210131091157949.png)
 
 
 
+### 使用场景
 
+固定路径，比如一个人从桥的这一头走到下一头。
 
+### 线性关节
+
+LineJoint他是一个特殊的平行关节，他的特尔二叔之处就是可以绕着anchorB进行旋转。
+
+## RevoluteJoint(旋转关节)
+
+旋转关节，可以看作一个轴，绕着轴旋转的车轮，这个关节 也有限制，比如最大角度，还有夹角。其次还有一些其他的函数。
+
+![image-20210131094859088](image/image-20210131094859088.png)
+
+- 角速度：JointSpeed
+- 关节的旋转角：JointAngle
+- 当前关节的扭矩力：MotorTorque
+
+通过限制，可以做成跷跷板
+
+### 作用
+
+可以在游戏里面作为车轮。
+
+跷跷板
+
+## DistanceJoint 
+
+距离关节：包含两个节点，分别对应两个刚体，使得各自绕着各自的轴转动，这个两个的距离不变
+
+## WeldJoint粘贴关节
+
+将两个刚体，连接成一个刚体。这个节点就是将它们死死的连接在一起。两个刚体是一样的，但是受到节点限制，使得两个保持不变，看起来像一个整体，如果将节点删除，会将两个分开。分别各自的速度，角速度。
+
+![image-20210131164924894](image/image-20210131164924894.png)
+
+### 使用
+
+那个一个圆旋转的游戏就可以使用它。
+
+## 滑轮节点
+
+滑轮作用：牵引负载   改变施加力  方向
+
+## 柔体实现
+
+weldJoint来实现
 
 
 ## 补充
@@ -608,7 +757,7 @@ public int direction() {
 - 给定世界向量，获取局部向量。 *请注意，每次调用此方法时，都会返回相同的Vector2实例。
     worldVector世界坐标中的向量，返回相应的局部向量。
 - getLocalVector 给定世界向量求局部向量
-    
+  
 ```
  mBody.getLocalVector(mBody.getLinearVelocityFromLocalPoint(new Vector2(0, 0)));
 ```
@@ -629,7 +778,182 @@ getWorldVector
 
 this.body.setTransform(new Vector2(20,20),10);
 
+# 碰撞
 
+box2D碰撞可以实现碰撞检测，实现反弹/变向等碰撞模拟。碰撞之后如何处理，比如粘贴，消失等，或者碰撞点的发一些特效。
+
+
+
+
+
+
+
+
+
+
+
+## 什么是碰撞
+
+两个接触或者部分重叠，box2d分为两种一种是形状发生的重叠接触，另一种是最小包围盒发生的接触和重叠，所引发的碰撞。QueryAABB和FattenAABB，后者的范围要大，不需要考虑形状。
+
+![image-20210131180814914](image/image-20210131180814914.png)
+
+![image-20210131180844497](image/image-20210131180844497.png)
+
+
+
+碰撞结束之后的处理。
+
+- 一种是获得Contact列表 
+- ContactListener
+
+### ContactList()获取列表
+
+得到的是Contact列表，但是需要区分World中的ContactList()和body中的ContactList()
+
+### ContactListener
+
+没有事件处理委派机制，仅仅提供一些函数，分别表示碰撞的不同阶段，Contact表示当前处理函数的对象。
+
+一般常用的是这个监听函数。
+
+
+
+我们可以通过Contact对其 做一些操作，比如规避碰撞或者是对碰撞做一些操作（恢复）。
+
+Contact的生命周期：从开始潜在碰撞开始，一直到最小包围盒不在重叠 销毁
+
+![image-20210131182100807](image/image-20210131182100807.png)
+
+碰撞发生之后，我们只能看到
+
+
+
+## FixtureA和FixtureB
+
+返回两个碰撞形状的对应的对象。但是我们顺利获取碰撞对象。AB无法区分信息，我们可以使用setUserData()添加信息，
+
+## getManiFold()
+
+保存碰撞点信息，是本地系统坐标，用于内部优化使用，实际应用中都是用的是全局坐标，并设置一些碰撞效果。
+
+```java
+WorldManifold worldManifold1 = contact.getWorldManifold();
+//碰撞点对应边对应的法向量
+Vector2 normal = worldManifold.getNormal();
+//碰撞点的坐标
+Vector2[] points = worldManifold.getPoints();
+//碰撞点鼠
+int numberOfContactPoints = worldManifold.getNumberOfContactPoints();
+```
+
+## isTouching()
+
+重叠为true  没有重叠为false;
+
+
+
+
+
+## setEnable()和IsEnable()
+
+游戏进行的某个时刻，不需要模拟，可以将设置able状态。false：关闭，忽略当前碰‘
+
+这状态只会保持一个step(),所以需要长时间的，就需要持续设置。
+
+![image-20210131212719468](image/image-20210131212719468.png)
+
+但是这样也是不可以的，因为已经完成了 模拟。
+
+正确的处理方式：
+
+在b2ConListener中对象或者子类中preSovle函数调用setEnable()。
+
+### step的执行过程
+
+- contact开启
+- presolve
+- 碰撞模拟
+
+所以在碰撞模拟之前就将其禁用了，进而就会忽略当前的碰撞。
+
+setEnable只会就会不在派发postSolve事件。
+
+
+
+
+
+## setSensor()
+
+对象不会进行碰撞模拟，可以直接穿过。这是fixture,
+
+bContact也有一个，可以在setSensor传入true，作为感应区，不会进行碰撞模拟
+
+
+
+### setFriction
+
+摩檫力，执行了这个方法之后，需要将数据恢复resetFriction()
+
+
+
+### setTangenSpeed
+
+碰撞时，在碰撞面的切线方向，为碰撞刚体添加一个线性速度speed，实现类似传送带的效果
+
+##  碰撞侦听器
+
+刚体碰撞可以发生多次的step操作，但是beginContact只会执行一次，endContact也是。
+
+postSolve函数每次碰撞都会进行模拟，直到分离。在碰撞修复阶段执行（下图的三次）
+
+![image-20210201095909411](image/image-20210201095909411.png)
+
+
+
+preSolve：从两个形状AABB接触开始，到AABB分开，每次都会执行
+
+
+
+## 参数
+
+```java
+public void preSolve(Contact contact, Manifold oldManifold)
+Manifold:用来记录上一次物理模拟之前碰撞点信息
+```
+
+```java
+public void postSolve(Contact contact, ContactImpulse impulse)
+impulse：记录碰撞产生的冲量
+```
+
+```java
+impulse.getNormalImpulses();  //垂直碰撞面
+impulse.getTangentImpulses();  //平行碰撞面
+```
+
+## 游戏碰撞
+
+### 万有引力
+
+## 撞击伤害
+
+撞击需要一次或者多次，撞击的时候会有一个垂直于碰撞边的冲量，保存在ContactImpulse中，将冲量作为撞击产生的伤害
+并且值只会在恢复的时候产生。PostSolve
+
+## 单边
+
+比如向上跳跃没有任何影响，下落过程中可以接住下裸体
+
+![image-20210201185037109](image/image-20210201185037109.png)![image-20210201185050434](image/image-20210201185050434.png)
+
+
+
+使用的位置，是模拟之前，postSolve是每次都进行调用的，所以在beginContact中使用，但是每次调用step的时候，会设置回去，所以需要修改源码，关闭Contact自动开启
+
+## 碰撞粘贴
+
+碰撞之后会粘贴在一起，一起运动
 
 
 
