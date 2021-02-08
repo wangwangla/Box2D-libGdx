@@ -33,12 +33,7 @@ public class MainGame extends Game {
 
 //        Constant.renderer = renderer = new Box2DDebugRenderer();
 
-        Constant.renderer = renderer = new Box2DDebugRenderer(true,
-                false,
-                false,
-                false,
-                false,
-                true);
+        Constant.renderer = renderer = new Box2DDebugRenderer();
         setScreen(new com.kangwang.world.GameScreen(this));
     }
 

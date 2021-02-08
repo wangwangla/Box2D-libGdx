@@ -71,6 +71,7 @@ public class Game02 extends Group {
 //            }
 //        });
 
+//        范围内有fixture的时候就调用
         callback = new QueryCallback() {
             @Override
             public boolean reportFixture(Fixture fixture) {

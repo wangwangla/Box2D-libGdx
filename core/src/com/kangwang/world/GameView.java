@@ -18,9 +18,8 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
-import com.doc.demo.Demo03;
 
-import kw.chapter05.Demo01;
+import kw.chapter06.Demo05;
 
 public class GameView extends Group {
     @Override
@@ -45,8 +44,17 @@ public class GameView extends Group {
 //        Game02 game01 = new Game02();
 //        addActor(game01);
 
-        Demo01 demo01 = new Demo01();
-        addActor(demo01);
+//        Demo01 demo01 = new Demo01();
+//        addActor(demo01);
+
+//        Game04 game04 = new Game04();
+//        addActor(game04);
+
+//        kw.chapter06.Demo03 demo02 = new kw.chapter06.Demo03();
+//        addActor(demo02);
+
+        Demo05 game05 = new Demo05();
+        addActor(game05);
     }
 
 
@@ -364,7 +372,7 @@ public class GameView extends Group {
 //        def.initialize(body2,body,new Vector2(10,100),new Vector2(20,100));
 //        Constant.world.createJoint(def);
 
-        Demo03 demo03 = new Demo03();
+
     }
 
 
