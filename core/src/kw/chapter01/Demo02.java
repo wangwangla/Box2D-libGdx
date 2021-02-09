@@ -28,7 +28,7 @@ public class Demo02 extends Group {
         utils.createBox(10,5, Constant.width-10,5,true);
 //        utils.createRedis();
         for (int i = 0; i < 10; i++) {
-            utils.createRadio(20+i,35+i*5, 5,5,false);
+            utils.createRadio(20+i,35+i*5, false);
         }
     }
 

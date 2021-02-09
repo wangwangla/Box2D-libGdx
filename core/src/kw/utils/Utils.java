@@ -26,14 +26,14 @@ public class Utils {
         return body;
     }
     public FixtureDef fixtureDef;
-    public Body createRadio(float posX, float posY, float boxWidth, float boxHeight, boolean isStatic){
+    public Body createRadio(float posX, float posY, boolean isStatic){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = isStatic? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody;
         bodyDef.fixedRotation = false;
         bodyDef.position.set(posX,posY);
         Body body = Constant.world.createBody(bodyDef);
         CircleShape polygonShape = new CircleShape();
-        polygonShape.setRadius(2);
+        polygonShape.setRadius(5);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 3;
