@@ -19,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
 
-import kw.chapter06.Demo08;
+import kw.chapter08.Demo03;
 
 public class GameView extends Group {
     @Override
@@ -80,10 +80,16 @@ public class GameView extends Group {
 //        Demo14 demo12 = new Demo14();
 //        addActor(demo12);
 
-        Demo08 demo12 = new Demo08();
-        addActor(demo12);
+//        Demo08 demo12 = new Demo08();
+//        addActor(demo12);
 //        Demo11 demo07 = new Demo11();
 //        addActor(demo07);
+
+//        Demo02 demo02 = new Demo02() ;
+//        addActor(demo02);
+
+        Demo03 demo03 = new Demo03();
+        addActor(demo03);
     }
 
 
