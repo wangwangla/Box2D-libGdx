@@ -3,7 +3,7 @@ package com.kangwang.word;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import wk.box.game.Box2dGame;
+import wk.box.game.Xxx;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {
@@ -13,6 +13,6 @@ public class DesktopLauncher {
         config.height =640;
         config.x = 0;
         config.y = 0;
-        new LwjglApplication(new Box2dGame(),config);
+        new LwjglApplication(new Xxx(),config);
     }
 }

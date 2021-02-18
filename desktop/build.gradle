@@ -17,9 +17,9 @@ task run(dependsOn: classes, type: JavaExec) {
 dependencies {
     compile project(':core')
     compile name: 'gdx-backend-lwjgl'
-    compile name:'gdx-natives'
-    compile name:'gdx-backend-lwjgl-natives'
-    compile name:'gdx-tools'
-    compile "com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-desktop"
-
+    compile name: 'gdx-natives'
+    compile name: 'gdx-backend-lwjgl-natives'
+    compile name: 'gdx-tools'
+    compile 'com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-desktop'
+    implementation files('libs/gdx-liquidfun-natives.jar')
 }
