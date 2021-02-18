@@ -9,7 +9,8 @@ import android.view.View;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.kangwang.world.MainGame;
+
+import wk.box.game.Box2dGame;
 
 public class AndroidLauncher extends AndroidApplication {
 
@@ -21,14 +22,14 @@ public class AndroidLauncher extends AndroidApplication {
         //指南针
         config.useCompass = false;
         //加速度
-        config.useAccelerometer = false;
+
         config.useWakelock = true;
         config.numSamples = 5;
         if (Build.MODEL.equals("MediaPad 10 FHD")) {
             // 华为这个型号的平板不支持
             config.numSamples = 0;
         }
-        initialize(new MainGame(), config);
+        initialize(new Box2dGame(), config);
     }
 
     @Override

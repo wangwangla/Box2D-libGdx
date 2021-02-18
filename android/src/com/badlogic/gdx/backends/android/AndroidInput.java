@@ -790,7 +790,7 @@ public class AndroidInput implements Input, OnKeyListener, OnTouchListener {
 		if (peripheral == Peripheral.Vibrator)
 			return (Build.VERSION.SDK_INT >= 11 && vibrator != null) ? vibrator.hasVibrator() : vibrator != null;
 		if (peripheral == Peripheral.MultitouchScreen) return hasMultitouch;
-		if (peripheral == Peripheral.RotationVector) return rotationVectorAvailable;
+
 		return false;
 	}
 

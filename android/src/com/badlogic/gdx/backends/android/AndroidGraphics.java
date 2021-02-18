@@ -16,15 +16,6 @@
 
 package com.badlogic.gdx.backends.android;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
-
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLContext;
-import javax.microedition.khronos.egl.EGLDisplay;
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.EGLConfigChooser;
 import android.opengl.GLSurfaceView.Renderer;
@@ -56,9 +47,14 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.GLVersion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.WindowedMean;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SnapshotArray;
+
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.egl.EGLContext;
+import javax.microedition.khronos.egl.EGLDisplay;
+import javax.microedition.khronos.opengles.GL10;
 
 /** An implementation of {@link Graphics} for Android.
  *
@@ -215,7 +211,6 @@ public class AndroidGraphics implements Graphics, Renderer {
 	}
 
 	/** {@inheritDoc} */
-	@Override
 	public void setGL20 (GL20 gl20) {
 		this.gl20 = gl20;
 		if (gl30 == null) {
@@ -237,7 +232,7 @@ public class AndroidGraphics implements Graphics, Renderer {
 	}
 
 	/** {@inheritDoc} */
-	@Override
+
 	public void setGL30 (GL30 gl30) {
 		this.gl30 = gl30;
 		if (gl30 != null) {
