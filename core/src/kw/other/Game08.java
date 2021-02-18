@@ -1,7 +1,6 @@
 package kw.other;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -45,10 +44,10 @@ public class Game08 extends Group {
                     b.len = curren.dst(prePoint);
                     b.x = x;
                     b.y = y;
-                    b.angle = curren.angle()
+                    b.angle = curren.angle();
 
-                    array.add(new Vector2(x,y));
-                    prePoint.set(x,y,0);
+                    array.add(b);
+                    prePoint.set(x,y);
                 }
             }
 
@@ -69,12 +68,12 @@ public class Game08 extends Group {
                 fixtureRequest.restitution = 0.2F;
 //segment.length /2/ 30, 2 / 30, new b2Vec2(segment.centerX/30, segment.centerY/30), segment.rotation
 
-                for (Vector2 vector2 : array) {
-                    PolygonShape polygonShape = new PolygonShape();
-                    polygonShape.setAsBox(1,1,vector2,4);
-                    fixtureRequest.shape = polygonShape;
-                    body.createFixture(fixtureRequest);
-                }
+//                for (Vector2 vector2 : array) {
+//                    PolygonShape polygonShape = new PolygonShape();
+//                    polygonShape.setAsBox(1,1,vector2,4);
+//                    fixtureRequest.shape = polygonShape;
+//                    body.createFixture(fixtureRequest);
+//                }
 
                 for (bean bean : array) {
                     PolygonShape polygonShape = new PolygonShape();
