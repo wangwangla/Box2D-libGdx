@@ -1,5 +1,6 @@
 package wk.box.game.screen.base;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -10,6 +11,7 @@ public class BaseScreen implements Screen {
     @Override
     public void show() {
         stage = new Stage(Box2dGame.viewport, Box2dGame.batch);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

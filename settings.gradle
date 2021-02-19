@@ -1,1 +1,1 @@
-include "core", "desktop", "android",'gdx','gdx-box2d','gdx-jnigen'
+include "core", "desktop", "android",'gdx','gdx-jnigen'

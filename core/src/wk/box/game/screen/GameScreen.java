@@ -1,6 +1,5 @@
 package wk.box.game.screen;
 
-import wk.box.game.Box2dGame;
 import wk.box.game.screen.base.BaseScreen;
 
 public class GameScreen extends BaseScreen {
@@ -18,8 +17,8 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void render(float delta) {
+
         super.render(delta);
-//        Box2dGame.world.step(1/60.0F,6,3);
-        Box2dGame.renderer.render(Box2dGame.world,Box2dGame.combined);
+
     }
 }
