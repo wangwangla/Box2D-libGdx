@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.kangwang.world.Constant;
 import kw.utils.Utils;
 
+/**
+ * 从一段到达另一端
+ */
 public class Game05 extends Group {
     private Utils utils;
     private Body box;

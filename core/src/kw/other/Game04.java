@@ -9,7 +9,7 @@ import com.kangwang.world.Constant;
 import kw.utils.Utils;
 
 /**
- * 冲量
+ * 冲量   一个块撞击刚体
  */
 public class Game04 extends Group {
     private Utils utils;

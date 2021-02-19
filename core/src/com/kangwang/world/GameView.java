@@ -91,6 +91,18 @@ public class GameView extends Group {
 //        Demo03 demo03 = new Demo03();
 //        addActor(demo03);
 
+//        Game08 game08 = new Game08();
+//        addActor(game08);
+//
+//        Game08 game02 = new Game08();
+//        addActor(game02);
+
+        /*
+        小车
+         */
+//        Demo11 demo01 = new Demo11();
+//        addActor(demo01);
+
         Game08 game08 = new Game08();
         addActor(game08);
     }

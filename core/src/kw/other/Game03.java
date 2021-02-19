@@ -12,6 +12,9 @@ import com.kangwang.world.Constant;
 
 import kw.utils.Utils;
 
+/**
+ * 单面  刚体
+ */
 public class Game03 extends Group {
     private Array<Body> gameArray = new Array<>();
     private Utils utils;

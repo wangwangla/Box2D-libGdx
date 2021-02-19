@@ -24,7 +24,7 @@ public class MainGame extends Game {
         Box2D.init();
         Gdx.input.setCatchBackKey(true);
         assetManager = new AssetManager();
-        viewport = new ExtendViewport(72,128);
+        viewport = new ExtendViewport(62,128);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuPolygonSpriteBatch();
 
