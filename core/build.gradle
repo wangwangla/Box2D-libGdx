@@ -3,10 +3,10 @@ apply plugin: "java"
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 dependencies {
-    compile 'org.json:json:20180813'
     compile project(':gdx')
 //    compile project(':gdx-box2d')
     implementation files('libs/gdx-liquidfun.jar')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 sourceSets.main.java.srcDirs = [ "src/" ]

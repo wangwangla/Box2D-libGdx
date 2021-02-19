@@ -20,6 +20,6 @@ dependencies {
     compile name: 'gdx-natives'
     compile name: 'gdx-backend-lwjgl-natives'
     compile name: 'gdx-tools'
-    compile 'com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-desktop'
     implementation files('libs/gdx-liquidfun-natives.jar')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }

@@ -131,15 +131,9 @@ repositories {
 }
 dependencies {
     implementation project(':core')
-    implementation "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
+//    implementation "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
     // https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-box2d-platform
 
-//    compile  group: 'com.badlogicgames.gdx', name: 'gdx-box2d-platform', version: '1.9.8'
-
-
-    implementation "com.badlogicgames.gdx:gdx-box2d:1.9.8"
-    implementation "com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-armeabi"
-    implementation "com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-armeabi-v7a"
-    implementation "com.badlogicgames.gdx:gdx-box2d-platform:1.9.8:natives-x86"
+//    compile  group: 'com.badlogicgames.gdx', name: 'gdx-box2d-platform', version: '1.9.8
 
 }

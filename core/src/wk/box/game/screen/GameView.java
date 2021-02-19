@@ -50,7 +50,7 @@ public class GameView extends Group {
     ParticleGroupDef mParticleGroupDef1;
     public void createPri(){
         ParticleSystemDef systemDef = new ParticleSystemDef();
-        systemDef.radius = 6f * WORLD_TO_BOX;
+        systemDef.radius = 8f * WORLD_TO_BOX;
         systemDef.dampingStrength = 0.2f;
         mParticleSystem = new ParticleSystem(Box2dGame.world, systemDef);
         mParticleSystem.setParticleDensity(1.3f);
