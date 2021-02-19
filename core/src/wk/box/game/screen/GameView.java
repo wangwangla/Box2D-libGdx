@@ -40,7 +40,7 @@ public class GameView extends Group {
         systemDef.radius = 6f * WORLD_TO_BOX;
         systemDef.dampingStrength = 0.6f;
         mParticleSystem = new ParticleSystem(Box2dGame.world, systemDef);
-        mParticleDebugRenderer = new ParticleDebugRenderer(new Color(0, 1, 0, 1), mParticleSystem.getParticleCount());
+        mParticleDebugRenderer = new ParticleDebugRenderer(new Color(1, 1, 1, 1), mParticleSystem.getParticleCount());
         createPri();
         crr();
     }
@@ -113,7 +113,7 @@ public class GameView extends Group {
         super.draw(batch, parentAlpha);
         Box2dGame.world.step(1/60.0F,6,3,1);
         Box2dGame.renderer.render(Box2dGame.world,Box2dGame.combined);
-        mParticleDebugRenderer.render(mParticleSystem, 120, Box2dGame.combined);
+        mParticleDebugRenderer.render(mParticleSystem, 12, Box2dGame.combined);
     }
 
     //    @Override
