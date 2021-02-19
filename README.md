@@ -1032,3 +1032,28 @@ impulse.getTangentImpulses();  //平行碰撞面
 ## 碰撞粘贴
 
 碰撞之后会粘贴在一起，一起运动
+
+## 流体
+
+流体使用方式liquidfun。
+
+https://github.com/finnstr/gdx-liquidfun-extension/wiki/Setup
+
+<img src="image/image-20210219113254433.png" alt="image-20210219113254433" style="zoom:50%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
