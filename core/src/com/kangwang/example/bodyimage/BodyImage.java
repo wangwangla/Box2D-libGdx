@@ -1,4 +1,4 @@
-package com.kangwang.world;
+package com.kangwang.example.bodyimage;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
+import com.kangwang.world.Constant;
 
 public class BodyImage extends Image {
     private BodyDef.BodyType type = BodyDef.BodyType.DynamicBody;
@@ -24,7 +25,6 @@ public class BodyImage extends Image {
 
     public BodyImage(TextureRegion region) {
         super(region);
-        setSize(getWidth()/Constant.PPM,getHeight()/Constant.PPM);
         setOrigin(Align.center);
     }
 

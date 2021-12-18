@@ -3,7 +3,7 @@ package kw.other;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.kangwang.world.B2DSeparator;
+import kw.chapter08.B2DSeparator;
 import com.kangwang.world.Constant;
 
 import kw.utils.Utils;

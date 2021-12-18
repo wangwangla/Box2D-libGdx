@@ -23,8 +23,6 @@ public class Game08 extends Group {
         setSize(Constant.width,Constant.hight);
         utils = new Utils();
         utils.createBox(50,90,1,1,false);
-
-
         BodyDef bodyRequest = new BodyDef();
         bodyRequest.type = BodyDef.BodyType.StaticBody;
         bodyRequest.position.set(0 ,0);//记得米和像素的转换关系

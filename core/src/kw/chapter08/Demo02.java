@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
-import com.kangwang.world.B2DSeparator;
 import com.kangwang.world.Constant;
 
 import kw.utils.Utils;

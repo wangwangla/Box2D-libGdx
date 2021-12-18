@@ -1,7 +1,6 @@
 package kw.chapter08;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.kangwang.world.B2DSeparator;
 import com.kangwang.world.Constant;
 
 import kw.utils.Utils;

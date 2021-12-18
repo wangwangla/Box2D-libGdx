@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.kangwang.example.bodyimage.BodyImage;
 import com.kangwang.world.Box2DFactory;
 import com.kangwang.world.Constant;
 
@@ -30,7 +31,7 @@ public class Demo01 extends Group {
         factory.setType(BodyDef.BodyType.DynamicBody);
         Body body = factory.getBody();
         body.setTransform(0, 0, 0);
-        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+        BodyImage bodyImage = new BodyImage(new TextureRegion(new Texture("2.png")));
         bodyImage.setPosition(10, 60);
         bodyImage.createBox2DImage();
         bodyImage.getBody().setFixedRotation(false);

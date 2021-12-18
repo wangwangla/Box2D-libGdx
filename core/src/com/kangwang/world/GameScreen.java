@@ -37,18 +37,6 @@ class GameScreen implements Screen {
         }
     };
 
-//    protected void keyEvent(int keyCode){
-//        if (keyCode == Input.Keys.UP){
-//
-//        }else if (keyCode == Input.Keys.DOWN){
-//
-//        }else if (keyCode == Input.Keys.LEFT){
-//
-//        }else if (keyCode == Input.Keys.RIGHT){
-//
-//        }
-//    }
-
     @Override
     public void show() {
 //        GameView view = new GameView();

@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJoint;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
+import com.kangwang.example.bodyimage.BodyImage;
 
 import kw.other.Game08;
 
@@ -179,7 +180,7 @@ public class GameView extends Group {
 //        factory.reset();
 //
 ////
-//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage bodyImage = new com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage(new TextureRegion(new Texture("2.png")));
 //        bodyImage.setPosition(10,60);
 //        Body box2DImage = bodyImage.createBox2DImage();
 //        bodyImage.getBody().setFixedRotation(false);
@@ -323,7 +324,7 @@ public class GameView extends Group {
 //        }
 
 //
-//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage bodyImage = new com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage(new TextureRegion(new Texture("2.png")));
 //        bodyImage.setPosition(10,60);
 //        bodyImage.createBox2DImage();
 //        bodyImage.getBody().setFixedRotation(false);
@@ -399,7 +400,7 @@ public class GameView extends Group {
 //        Body body2 = factory2.getBody();
 //        factory2.reset();
 
-//        com.kangwang.world.BodyImage bodyImage = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+//        com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage bodyImage = new com.kangwang.example.OneBodyMuFixture.bodyimage.BodyImage(new TextureRegion(new Texture("2.png")));
 //        bodyImage.setPosition(10,60);
 //        Body box2DImage = bodyImage.createBox2DImage();
 //        bodyImage.getBody().setFixedRotation(false);
@@ -446,7 +447,7 @@ public class GameView extends Group {
     }
 
     private void initRedis() {
-        com.kangwang.world.BodyImage buut = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("2.png")));
+        BodyImage buut = new BodyImage(new TextureRegion(new Texture("2.png")));
         buut.setSize(20,20);
         buut.setType(BodyDef.BodyType.DynamicBody);
         buut.setPosition(Constant.width/2,50,Align.bottom);
@@ -457,9 +458,9 @@ public class GameView extends Group {
         buut.getBody().setLinearVelocity(0,71);
         addActor(buut);
     }
-    com.kangwang.world.BodyImage bottom;
+    BodyImage bottom;
     private void initBottomBlack() {
-        bottom = new com.kangwang.world.BodyImage(new TextureRegion(new Texture("1.png")));
+        bottom = new BodyImage(new TextureRegion(new Texture("1.png")));
         bottom.setSize(100,5);
         bottom.setPosition(Constant.width/2,20, Align.bottom);
         addActor(bottom);
@@ -475,7 +476,7 @@ public class GameView extends Group {
     public void initBlack(){
         float v = Constant.width / 10;
         for (int i = 0; i < 10; i++) {
-            com.kangwang.world.BodyImage image = new BodyImage(new TextureRegion(new Texture("1.png")));
+            BodyImage image = new BodyImage(new TextureRegion(new Texture("1.png")));
             image.setSize(v-3,v);
             image.setPosition(v*i+1.5F,Constant.hight - 10, Align.topLeft);
             addActor(image);

@@ -12,13 +12,15 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kangwang.asset.FontResource;
+import com.kangwang.world.screen.LoadingScreen;
 
 public class MainGame extends Game {
     private AssetManager assetManager;
     private Viewport viewport;
     private Batch batch;
-    private World world;
-    private Box2DDebugRenderer renderer;
+    public static FontResource resource;
+
     @Override
     public void create() {
         Box2D.init();
@@ -27,14 +29,13 @@ public class MainGame extends Game {
         viewport = new ExtendViewport(62,128);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuPolygonSpriteBatch();
-
         Vector2 vector2 = new Vector2(0,-10.0F);
-        Constant.world = world = new World(vector2,true);
-
-//        Constant.renderer = renderer = new Box2DDebugRenderer();
-
-        Constant.renderer = renderer = new Box2DDebugRenderer();
-        setScreen(new com.kangwang.world.GameScreen(this));
+        Constant.world = new World(vector2,true);
+        Constant.renderer = new Box2DDebugRenderer();
+        resource = new FontResource(assetManager);
+        assetManager.finishLoading();
+        resource.getFont();
+        setScreen(new LoadingScreen(this));
     }
 
     public Batch getBatch() {
