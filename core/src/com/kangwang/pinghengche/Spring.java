@@ -35,7 +35,8 @@ public class Spring {
 //        weldJointDef1.maxMotorTorque = 1000;
 
         MouseJointDef md = new MouseJointDef();
-        md.bodyA = Constant.world.createBody(new BodyDef());
+        Body body1 = new Boundary(0, 12, 10, 10).getBody();
+        md.bodyA = body1;
         md.bodyB = body;
         body.setFixedRotation(true);
         md.target.set(WorldConstant.convert(x),WorldConstant.convert(y));

@@ -14,7 +14,7 @@ public class DesktopLauncher {
 //        texturePack();
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = "wrod squares";
-        config.width =460; //485
+        config.width =1460; //485
         config.height =780;
         new LwjglApplication(new MainGame(),config);
     }

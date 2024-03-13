@@ -22,11 +22,12 @@ public class PhcView extends Group {
     public PhcView(){
         //地板
         array = new Array<>();
-        array.add(new Boundary(0, 2,Constant.width,10));
+        array.add(new Boundary(Constant.width, 2,Constant.width,10));
         aa.add(new Boundary(0, 12,10,10).getBody());
+        aa.add(new Boundary(0, 22,10,10).getBody());
         pendulum = new Pendulum(Constant.width/2,Constant.hight/2);
         targetX = WorldConstant.convert(Constant.width/2.0f);
-        pid = new Pid(25, 20, 30);
+        pid = new Pid(25, 20, 20);
         spring = new Spring();
         filter = new Filter();
         debug  = new Debug();
@@ -45,7 +46,10 @@ public class PhcView extends Group {
         super.act(delta);
         Constant.world.step(1/60f, 10, 10);
         combined.set(Constant.combined);
-        combined.scale(5,5,5);
+        combined.scale(WorldConstant.PPM,
+                WorldConstant.PPM,
+                WorldConstant.PPM);
+
 
         Constant.renderer.render(Constant.world,combined);
         time += delta;
@@ -57,11 +61,11 @@ public class PhcView extends Group {
         Vector2 velocity = pendulum.getVelocity();
         filter.push(velocity.x);
 
-        float smoothVelocity = -filter.getValue();
+        float smoothVelocity = filter.getValue();
 
-        float predictPos = pos.x + 25 * smoothVelocity;
+        float predictPos = pos.x + 15 * smoothVelocity;
         if((predictPos - targetX) * (pos.x-targetX) < 0) {
-            predictPos = pos.x + 300 * smoothVelocity;
+            predictPos = pos.x + 100 * smoothVelocity;
         }
 
 
@@ -69,7 +73,7 @@ public class PhcView extends Group {
 
         float targetAngle = rectify(-(predictPos-targetX)/Constant.width*3.1415f/5.0f,
                 -0.25f, 0.25f);
-        float nowAngle = pendulum.getAngleRadians();
+        float nowAngle = -pendulum.getAngleRadians();
         if(
                 Math.abs(10 * smoothVelocity) > 60 &&
                         (predictPos - targetX) * (pos.x-targetX) >= 0 &&
@@ -79,8 +83,8 @@ public class PhcView extends Group {
         }
         pid.setcError(targetAngle-nowAngle);
         pid.step(delta);
-        float speed = pid.getOutput();
-        pendulum.setMotorSpeed(speed*1000);
+        float speed = -pid.getOutput();
+        pendulum.setMotorSpeed(speed*100);
         }
         pendulum.display();
     }
@@ -93,9 +97,9 @@ public class PhcView extends Group {
     public void userTouch(float x, float y) {
 
         for (Body body : aa) {
-            spring.bind(x,y,body);
+//            spring.bind(x,y,body);
         }
-        targetX = WorldConstant.convert(x);
+        targetX = x;
         Vector2 pos = pendulum.getPosition();
         System.out.println(pos.x +"     "+targetX);
     }

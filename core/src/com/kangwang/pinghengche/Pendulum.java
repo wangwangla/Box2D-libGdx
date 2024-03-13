@@ -55,7 +55,7 @@ public class Pendulum {
 
         weldJointDef1.frequencyHz = 30;
         weldJointDef1.dampingRatio = 1.0F;
-        weldJointDef1.maxMotorTorque = 4000;
+        weldJointDef1.maxMotorTorque = 1000;
 
         wheelJoint = (WheelJoint) Constant.world.createJoint(weldJointDef1);
         wheelJoint.enableMotor(true);
@@ -64,8 +64,12 @@ public class Pendulum {
         elements.add(wheel.body,stick.body,handle.body);
     }
 
+    Vector2 temp = new Vector2();
     public Vector2 getPosition() {
-        return this.wheel.body.getPosition();
+        Vector2 position = this.wheel.body.getPosition();
+        temp.set(WorldConstant.reconvert(position.x),
+                WorldConstant.reconvert(position.y));
+        return temp;
     }
 
     public Vector2 getVelocity() {
@@ -81,7 +85,7 @@ public class Pendulum {
 
     public void setMotorSpeed(float speed) {
 
-
+        this.wheelJoint.enableMotor(true);
         this.wheelJoint.setMotorSpeed(speed);
     }
 

@@ -21,7 +21,7 @@ public class MainGame extends Game {
     public void create() {
         Box2D.init();
         Gdx.input.setCatchBackKey(true);
-        viewport = new ExtendViewport(360,640);
+        viewport = new ExtendViewport(860,340);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuSpriteBatch();
         Constant.world = new World(new Vector2(0,-20F),true);
