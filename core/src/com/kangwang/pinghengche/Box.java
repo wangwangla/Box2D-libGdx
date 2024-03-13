@@ -60,7 +60,11 @@ public class Box {
     }
 
     public boolean contains(float x,float y){
-        Array<Fixture> fixtureList = body.getFixtureList();
+        Array<Fixture> fixtureList = this.body.getFixtureList();
+        for (Fixture fixture : fixtureList) {
+            Vector2 position = fixture.getBody().getPosition();
+            return position.x == x && position.y == y;
+        }
         return false;
     }
 }

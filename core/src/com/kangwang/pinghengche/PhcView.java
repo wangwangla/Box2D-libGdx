@@ -1,44 +1,87 @@
 package com.kangwang.pinghengche;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
 import com.kangwang.word.Constant;
 
 public class PhcView extends Group {
-    private Array boundaries = new Array();
     private Pendulum pendulum;
+    private Array<Boundary> array;
     private float targetX;
-    private Array boxes = new Array();
+    private Pid pid;
+    private Spring spring;
+    private Filter filter;
+    private Debug  debug;
     public PhcView(){
         //地板
-        boundaries.add(new Boundary(0, 0,Constant.width,10));
-
+        array = new Array<>();
+        array.add(new Boundary(0, 20,Constant.width,10));
         pendulum = new Pendulum(Constant.width/2,Constant.hight/2);
-//        targetX = Constant.width/2;
-//
-//        boxes.add(new Box(25,0,25,25));
-//        boxes.add(new Box(25,0,25,25));
-//
-//        Pid pid = new Pid(25, 20, 20);
-//        spring = new Spring();
-//        Filter filter = new Filter();
-//        Debug debug = new Debug();
+        targetX = Constant.width/2;
+        pid = new Pid(25, 20, 20);
+        spring = new Spring();
+        filter = new Filter();
+        debug  = new Debug();
+
     }
-    Spring spring;
-    public float rectify(float x,float minValue,float mxValue){
-        if (x > mxValue) return mxValue;
+
+
+
+    public float rectify(float x,float minValue,float maxValue) {
+        if (x > maxValue) return maxValue;
         if (x < minValue) return minValue;
         return x;
     }
 
+
     @Override
     public void act(float delta) {
         super.act(delta);
-//        spring.updata(Gdx.input.);
-
-        Constant.world.step(1/60f, 6, 2);
+        Constant.world.step(1/60f, 10, 10);
         Constant.renderer.render(Constant.world,Constant.combined);
+        spring.update(Gdx.input.getX(), Gdx.input.getX());
 
-        pendulum.execteInput();
+
+        Vector2 pos = pendulum.getPosition();
+        Vector2 velocity = pendulum.getVelocity();
+        filter.push(velocity.x);
+
+        float smoothVelocity = filter.getValue();
+
+        float predictPos = pos.x + 25 * smoothVelocity;
+        if((predictPos - targetX) * (pos.x-targetX) < 0) {
+            predictPos = pos.x + 100 * smoothVelocity;
+        }
+
+
+        float targetAngle = rectify(-(predictPos-targetX)/Constant.width*3.1415f/5.0f, -0.25f, 0.25f);
+        float nowAngle = pendulum.getAngleRadians();
+        if(
+                Math.abs(10 * smoothVelocity) > 60 &&
+                        (predictPos - targetX) * (pos.x-targetX) >= 0 &&
+                        (predictPos - targetX) * smoothVelocity < 0
+        ) {
+            targetAngle = 0;
+        }
+        pid.setcError(targetAngle-nowAngle);
+        pid.step(delta);
+        float speed = pid.getOutput();
+        pendulum.setMotorSpeed(1000*speed);
+        pendulum.display();
+    }
+
+    public Array<Body> getElememt() {
+        Array<Body> elements = pendulum.getElements();
+        return elements;
+    }
+
+    public void userTouch(float x, float y) {
+        for (Body body : getElememt()) {
+            spring.bind(x,y,body);
+        }
+        targetX = x;
     }
 }

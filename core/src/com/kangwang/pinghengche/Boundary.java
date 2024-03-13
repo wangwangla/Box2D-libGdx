@@ -37,6 +37,6 @@ public class Boundary {
     }
 
     public void display(){
-
+        //绘制
     }
 }

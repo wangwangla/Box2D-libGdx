@@ -14,21 +14,18 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainGame extends Game {
-    private AssetManager assetManager;
+
     private Viewport viewport;
     private Batch batch;
-    private World world;
-    private Box2DDebugRenderer renderer;
     @Override
     public void create() {
         Box2D.init();
         Gdx.input.setCatchBackKey(true);
-        assetManager = new AssetManager();
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewport = new ExtendViewport(50,50);
         resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new CpuSpriteBatch();
-        Constant.world = world = new World(new Vector2(0,-90F),true);
-        Constant.renderer = renderer = new Box2DDebugRenderer();
+        Constant.world = new World(new Vector2(0,-10F),true);
+        Constant.renderer = new Box2DDebugRenderer();
         setScreen(new GameScreen(this));
     }
 
