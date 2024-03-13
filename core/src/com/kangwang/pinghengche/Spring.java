@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.badlogic.gdx.utils.Array;
+import com.kangwang.WorldConstant;
 import com.kangwang.word.Constant;
 
 public class Spring {
@@ -18,7 +19,7 @@ public class Spring {
 
     public void update(float x,float y){
         if (this.mouseJoint != null){
-            mouseJoint.setTarget(new Vector2(x,y));
+            mouseJoint.setTarget(new Vector2(WorldConstant.convert(x),WorldConstant.convert(y)));
         }
     }
 
@@ -37,7 +38,7 @@ public class Spring {
         md.bodyA = Constant.world.createBody(new BodyDef());
         md.bodyB = body;
         body.setFixedRotation(true);
-        md.target.set(x,y);
+        md.target.set(WorldConstant.convert(x),WorldConstant.convert(y));
         md.maxForce = 1000.0f * body.getMass();
         md.frequencyHz = 5.0f;
         md.dampingRatio = 0.9f;

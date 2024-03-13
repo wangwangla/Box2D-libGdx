@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.kangwang.WorldConstant;
 import com.kangwang.word.Constant;
 
 public class Boundary {
@@ -21,7 +22,7 @@ public class Boundary {
 
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.StaticBody;
-        def.position.set(x,y);
+        def.position.set(WorldConstant.convert(x),WorldConstant.convert(y));
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 1.0F;
@@ -29,7 +30,7 @@ public class Boundary {
         fixtureDef.restitution = 0.2F;
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(w,h/2);
+        shape.setAsBox(WorldConstant.convert(w),WorldConstant.convert(h/2.0f));
         fixtureDef.shape = shape;
 
         this.body = Constant.world.createBody(def);
@@ -38,5 +39,9 @@ public class Boundary {
 
     public void display(){
         //绘制
+    }
+
+    public Body getBody() {
+        return body;
     }
 }

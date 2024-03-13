@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.kangwang.WorldConstant;
 import com.kangwang.word.Constant;
 
 public class Circle {
@@ -19,11 +20,13 @@ public class Circle {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(this.x,this.y);
-
+        bodyDef.position.set(
+                WorldConstant.convert(this.x),
+                WorldConstant.convert(this.y));
 
         CircleShape polygonShape = new CircleShape();
-        polygonShape.setRadius(this.r);
+        polygonShape.setRadius(
+                WorldConstant.convert(this.r));
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;

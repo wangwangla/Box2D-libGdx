@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
+import com.kangwang.WorldConstant;
 import com.kangwang.word.Constant;
 
 public class Box {
@@ -27,10 +28,10 @@ public class Box {
         this.h = h;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(this.x,this.y);
+        bodyDef.position.set(WorldConstant.convert(this.x),WorldConstant.convert(this.y));
 
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(this.w/2, this.h/2);
+        polygonShape.setAsBox(WorldConstant.convert(this.w/2), WorldConstant.convert(this.h/2));
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;

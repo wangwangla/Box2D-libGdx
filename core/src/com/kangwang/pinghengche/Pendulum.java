@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WheelJoint;
 import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.badlogic.gdx.utils.Array;
+import com.kangwang.WorldConstant;
 import com.kangwang.word.Constant;
 
 import java.util.Map;
@@ -31,13 +32,13 @@ public class Pendulum {
         WeldJointDef weldJointDef = new WeldJointDef();
         weldJointDef.bodyA = this.cart.body;
         weldJointDef.bodyB = this.stick.body;
-        weldJointDef.localAnchorB.set(0,-len/2);
+        weldJointDef.localAnchorB.set(WorldConstant.convert(0),WorldConstant.convert(-len/2));
         Constant.world.createJoint(weldJointDef);
 //
         weldJointDef = new WeldJointDef();
         weldJointDef.bodyA = this.handle.body;
         weldJointDef.bodyB = this.stick.body;
-        weldJointDef.localAnchorB.set(0,len/2);
+        weldJointDef.localAnchorB.set(WorldConstant.convert(0),WorldConstant.convert(len/2));
         Constant.world.createJoint(weldJointDef);
 //
 //        weldJointDef = new WeldJointDef();
@@ -54,7 +55,7 @@ public class Pendulum {
 
         weldJointDef1.frequencyHz = 30;
         weldJointDef1.dampingRatio = 1.0F;
-        weldJointDef1.maxMotorTorque = 1000;
+        weldJointDef1.maxMotorTorque = 4000;
 
         wheelJoint = (WheelJoint) Constant.world.createJoint(weldJointDef1);
         wheelJoint.enableMotor(true);
@@ -72,14 +73,15 @@ public class Pendulum {
     }
 
     public float getAngleRadians() {
-        float radians = (float) Math.toRadians(this.stick.body.getAngle());
+        float radians = this.stick.body.getAngle();
         while(radians >  PI) radians -= 2*PI;
         while(radians < -PI) radians += 2*PI;
         return radians;
     }
 
     public void setMotorSpeed(float speed) {
-        wheelJoint.enableMotor(true);
+
+
         this.wheelJoint.setMotorSpeed(speed);
     }
 
